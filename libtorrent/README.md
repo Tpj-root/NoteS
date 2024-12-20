@@ -48,7 +48,7 @@ g++ -o torrent_test main.cpp -I/home/sab/Desktop/RUN_AND_BUILD/libtorrent/includ
 
 
 
-LD_LIBRARY_PATH=. ./torrent_test
+LD_LIBRARY_PATH=/home/sab/Desktop/RUN_AND_BUILD/libtorrent/build/ ./torrent_test
 
 
 
