@@ -179,16 +179,23 @@ homemod - homing function
   <tr>
     <th>NO</th>
     <th>NAME</th>
+    <th>SHORT</th>
     <th>SYNOPSIS</th>
     <th>DESCRIPTION</th>
     <th>EXAMPLES</th>
+    <th>PageNo</th>
   </tr>
   <tr>
   <td style="width: 50px; word-wrap: break-word;">1</td>
     <td style="width: 50px; word-wrap: break-word;">linuxcnc</td>
-  <td style="width: 150px; word-wrap: break-word;">inuxcnc [-v] [-d] [INIFILE</td>
-  <td style="width: 150px; word-wrap: break-word;">111</td>
-  <td style="width: 200px; word-wrap: break-word;">111</td>
+    <td style="width: 50px; word-wrap: break-word;">linuxcnc − LinuxCNC (The Enhanced Machine Controller)</td>
+  <td style="width: 150px; word-wrap: break-word;">inuxcnc [-v] [-d] [INIFILE]</td>
+  <td style="width: 150px; word-wrap: break-word;">linuxcnc is used to start LinuxCNC (The Enhanced Machine Controller). It starts the realtime system and
+then initializes a number of LinuxCNC components (IO, Motion, GUI, HAL, etc). The most important pa-
+rameter is INIFILE, which specifies the configuration name you would like to run. If INIFILE is not speci-
+fied, the linuxcnc script presents a graphical wizard to let you choose one.</td>
+  <td style="width: 200px; word-wrap: break-word;">linuxcnc configs/sim/sim.ini <br> linuxcnc /etc/linuxcnc/sample-configs/stepper/stepper_mm.ini</td>
+  <td style="width: 200px; word-wrap: break-word;">1</td>
 </tr>
   <tr>
   <td style="width: 50px; word-wrap: break-word;">111</td>
@@ -196,6 +203,7 @@ homemod - homing function
   <td style="width: 150px; word-wrap: break-word;">TCK</td>
   <td style="width: 150px; word-wrap: break-word;">111</td>
   <td style="width: 200px; word-wrap: break-word;">111</td>
+    <td style="width: 200px; word-wrap: break-word;">111</td>
 </tr>
   <tr>
   <td style="width: 50px; word-wrap: break-word;">111</td>
@@ -203,6 +211,7 @@ homemod - homing function
   <td style="width: 150px; word-wrap: break-word;">TCK</td>
   <td style="width: 150px; word-wrap: break-word;">111</td>
   <td style="width: 200px; word-wrap: break-word;">111</td>
+    <td style="width: 200px; word-wrap: break-word;">111</td>
 </tr>
 </table>
 
