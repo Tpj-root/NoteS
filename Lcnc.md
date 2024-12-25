@@ -187,34 +187,34 @@ homemod - homing function
   </tr>
   <tr>
   <td style="width: 50px; word-wrap: break-word;">1</td>
-    <td style="width: 50px; word-wrap: break-word;">linuxcnc</td>
-    <td style="width: 50px; word-wrap: break-word;">linuxcnc − LinuxCNC (The Enhanced Machine Controller)</td>
-  <td style="width: 150px; word-wrap: break-word;">inuxcnc [-v] [-d] [INIFILE]</td>
-  <td style="width: 150px; word-wrap: break-word;">linuxcnc is used to start LinuxCNC (The Enhanced Machine Controller). It starts the realtime system and
+  <td style="width: 50px; word-wrap: break-word;">linuxcnc</td>
+  <td style="width: 50px; word-wrap: break-word;">LinuxCNC (The Enhanced Machine Controller)</td>
+  <td style="width: 150px; word-wrap: break-word;">linuxcnc [-v] [-d] [INIFILE]</td>
+  <td style="width: 150px; word-wrap: break-word;">It starts the realtime system and
 then initializes a number of LinuxCNC components (IO, Motion, GUI, HAL, etc). The most important pa-
 rameter is INIFILE, which specifies the configuration name you would like to run. If INIFILE is not speci-
 fied, the linuxcnc script presents a graphical wizard to let you choose one.</td>
   <td style="width: 200px; word-wrap: break-word;">linuxcnc configs/sim/sim.ini <br> linuxcnc /etc/linuxcnc/sample-configs/stepper/stepper_mm.ini</td>
-  <td style="width: 200px; word-wrap: break-word;">1</td>
+  <td style="width: 200px; word-wrap: break-word;">1-2</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">2</td>
+  <td style="width: 50px; word-wrap: break-word;">5axisgui</td>
+  <td style="width: 150px; word-wrap: break-word;">-</td>
+  <td style="width: 150px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">5axisgui is one of the sample Vismach GUIs for LinuxCNC</td>
+      <td style="width: 200px; word-wrap: break-word;"></td>
+    <td style="width: 200px; word-wrap: break-word;">3</td>
 </tr>
   <tr>
   <td style="width: 50px; word-wrap: break-word;">111</td>
-    <td style="width: 50px; word-wrap: break-word;">Test</td>
+  <td style="width: 50px; word-wrap: break-word;">Test</td>
   <td style="width: 150px; word-wrap: break-word;">TCK</td>
   <td style="width: 150px; word-wrap: break-word;">111</td>
   <td style="width: 200px; word-wrap: break-word;">111</td>
-    <td style="width: 200px; word-wrap: break-word;">111</td>
-</tr>
-  <tr>
-  <td style="width: 50px; word-wrap: break-word;">111</td>
-    <td style="width: 50px; word-wrap: break-word;">Test</td>
-  <td style="width: 150px; word-wrap: break-word;">TCK</td>
-  <td style="width: 150px; word-wrap: break-word;">111</td>
   <td style="width: 200px; word-wrap: break-word;">111</td>
-    <td style="width: 200px; word-wrap: break-word;">111</td>
+  <td style="width: 200px; word-wrap: break-word;">3</td>
 </tr>
 </table>
-
-linuxcnc
 
 
