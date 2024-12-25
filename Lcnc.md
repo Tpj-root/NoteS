@@ -1,7 +1,13 @@
 # Lcnc
 
 
+linuxcnc Default password user::live
 
+reset pass 
+
+```
+sudo passwd root
+```
 
 
 
@@ -142,5 +148,64 @@ https://github.com/LinuxCNC/linuxcnc/blob/1ed894e830e871ad6f3f84c3213a1cd7dd1e92
                 tune - some tuning is possible (setp & such).
                 all  - HAL completely unlocked.
 
+
+
+
+
+
+# man
+
+tpmod - trajectory planning
+
+
+homemod - homing function
+
+
+
+
+
+# LinuxCNC_Manual_Pages
+
+
+ - linuxcnc − LinuxCNC (The Enhanced Machine Controller)
+
+
+
+
+
+# Debian Test Lab
+
+<table>
+  <tr>
+    <th>NO</th>
+    <th>NAME</th>
+    <th>SYNOPSIS</th>
+    <th>DESCRIPTION</th>
+    <th>EXAMPLES</th>
+  </tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">1</td>
+    <td style="width: 50px; word-wrap: break-word;">linuxcnc</td>
+  <td style="width: 150px; word-wrap: break-word;">inuxcnc [-v] [-d] [INIFILE</td>
+  <td style="width: 150px; word-wrap: break-word;">111</td>
+  <td style="width: 200px; word-wrap: break-word;">111</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">111</td>
+    <td style="width: 50px; word-wrap: break-word;">Test</td>
+  <td style="width: 150px; word-wrap: break-word;">TCK</td>
+  <td style="width: 150px; word-wrap: break-word;">111</td>
+  <td style="width: 200px; word-wrap: break-word;">111</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">111</td>
+    <td style="width: 50px; word-wrap: break-word;">Test</td>
+  <td style="width: 150px; word-wrap: break-word;">TCK</td>
+  <td style="width: 150px; word-wrap: break-word;">111</td>
+  <td style="width: 200px; word-wrap: break-word;">111</td>
+</tr>
+</table>
+
+linuxcnc
 
 
