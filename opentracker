@@ -1,0 +1,25 @@
+
+Build_tips
+		
+		
+		
+https://github.com/masroore/libowfat
+
+git clone https://github.com/masroore/opentracker.git
+
+
+
+
+make CFLAGS="-DSTATS"
+
+
+Use the set_flags method to enable add_torrent_params::flag_sequential_download.
+
+
+
+
+View the 
+
+
+http://192.168.1.6:6969/stats
+
