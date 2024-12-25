@@ -194,7 +194,7 @@ homemod - homing function
 then initializes a number of LinuxCNC components (IO, Motion, GUI, HAL, etc). The most important pa-
 rameter is INIFILE, which specifies the configuration name you would like to run. If INIFILE is not speci-
 fied, the linuxcnc script presents a graphical wizard to let you choose one.</td>
-  <td style="width: 200px; word-wrap: break-word;">linuxcnc configs/sim/sim.ini <br> linuxcnc /etc/linuxcnc/sample-configs/stepper/stepper_mm.ini</td>
+  <td style="width: 200px; word-wrap: break-word;">linuxcnc configs/sim/sim.ini <br> <br> linuxcnc /etc/linuxcnc/sample-configs/stepper/stepper_mm.ini</td>
   <td style="width: 200px; word-wrap: break-word;">1-2</td>
 </tr>
   <tr>
