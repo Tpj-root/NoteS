@@ -213,3 +213,17 @@ for further information.</td>
 </table>
 
 
+
+
+
+
+
+
+
+Learnmore
+
+https://github.com/multigcs/linuxcnc-web
+http://wiki.linuxcnc.org/cgi-bin/wiki.pl?Rockhopper_Web_Server
+
+https://forum.linuxcnc.org/38-general-linuxcnc-questions/45801-how-to-install-vnc-on-linuxcnc-2-9-with-qtplasmac
+
