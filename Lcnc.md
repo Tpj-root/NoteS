@@ -169,12 +169,6 @@ homemod - homing function
 
  - linuxcnc − LinuxCNC (The Enhanced Machine Controller)
 
-
-
-
-
-# Debian Test Lab
-
 <table>
   <tr>
     <th>NO</th>
@@ -207,13 +201,14 @@ fied, the linuxcnc script presents a graphical wizard to let you choose one.</td
     <td style="width: 200px; word-wrap: break-word;">3</td>
 </tr>
   <tr>
-  <td style="width: 50px; word-wrap: break-word;">111</td>
-  <td style="width: 50px; word-wrap: break-word;">Test</td>
-  <td style="width: 150px; word-wrap: break-word;">TCK</td>
-  <td style="width: 150px; word-wrap: break-word;">111</td>
-  <td style="width: 200px; word-wrap: break-word;">111</td>
-  <td style="width: 200px; word-wrap: break-word;">111</td>
-  <td style="width: 200px; word-wrap: break-word;">3</td>
+  <td style="width: 50px; word-wrap: break-word;">3</td>
+  <td style="width: 50px; word-wrap: break-word;">axis−remote</td>
+  <td style="width: 150px; word-wrap: break-word;">AXIS Remote Interface</td>
+  <td style="width: 150px; word-wrap: break-word;">axis−remote OPTIONS|FILENAME</td>
+  <td style="width: 200px; word-wrap: break-word;">axis−remote is a small script that triggers commands in a running AXIS GUI. Use axis−remote −−help
+for further information.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">4</td>
 </tr>
 </table>
 
