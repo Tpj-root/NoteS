@@ -217,6 +217,54 @@ for further information.</td>
 
 
 
+# Table of Contents
+
+<table style="border: 1px solid #ddd; border-collapse: collapse; width: 100%;">
+  <thead style="background-color: #4CAF50; color: white;">
+    <tr>
+      <th style="padding: 10px; text-align: left;">NO</th>
+      <th style="padding: 10px; text-align: left;">NAME</th>
+      <th style="padding: 10px; text-align: left;">SHORT</th>
+      <th style="padding: 10px; text-align: left;">SYNOPSIS</th>
+      <th style="padding: 10px; text-align: left;">DESCRIPTION</th>
+      <th style="padding: 10px; text-align: left;">EXAMPLES</th>
+      <th style="padding: 10px; text-align: left;">PageNo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #ddd;">1</td>
+      <td style="padding: 10px; border: 1px solid #ddd;">Sample Name</td>
+      <td style="padding: 10px; border: 1px solid #ddd;">Short Description</td>
+      <td style="padding: 10px; border: 1px solid #ddd;">Synopsis Example</td>
+      <td style="padding: 10px; border: 1px solid #ddd;">Full Description</td>
+      <td style="padding: 10px; border: 1px solid #ddd;">Example Code</td>
+      <td style="padding: 10px; border: 1px solid #ddd;">10</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; border: 1px solid #ddd;">2</td>
+      <td style="padding: 10px; border: 1px solid #ddd;">Another Name</td>
+      <td style="padding: 10px; border: 1px solid #ddd;">Another Short</td>
+      <td style="padding: 10px; border: 1px solid #ddd;">Another Synopsis</td>
+      <td style="padding: 10px; border: 1px solid #ddd;">Another Description</td>
+      <td style="padding: 10px; border: 1px solid #ddd;">More Examples</td>
+      <td style="padding: 10px; border: 1px solid #ddd;">20</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
