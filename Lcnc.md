@@ -214,17 +214,14 @@ for further information.</td>
 
 
 
+diff language tag to generate some colored text:
 
-
-# Colored Text in GitHub README
-
-This is <span style="color: red;">red text</span>, and this is <span style="color: green;">green text</span>.
-
-
-
-
-
-
+```diff
+- text in red
++ text in green
+! text in orange
+# text in gray
+@@ text in purple (and bold)@@
 
 
 
