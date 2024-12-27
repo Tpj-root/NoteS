@@ -182,7 +182,8 @@ homemod - homing function
   <tr>
   <td style="width: 50px; word-wrap: break-word;">1</td>
   <td style="width: 50px; word-wrap: break-word;">linuxcnc</td>
-  <td style="width: 50px; word-wrap: break-word;">LinuxCNC (The Enhanced Machine Controller)</td>
+  <td style="width: 50px; word-wrap: break-word;">```diff
+-LinuxCNC (The Enhanced Machine Controller)```</td>
   <td style="width: 150px; word-wrap: break-word;">linuxcnc [-v] [-d] [INIFILE]</td>
   <td style="width: 150px; word-wrap: break-word;">It starts the realtime system and
 then initializes a number of LinuxCNC components (IO, Motion, GUI, HAL, etc). The most important pa-
@@ -221,21 +222,7 @@ diff language tag to generate some colored text:
 + text in green
 ! text in orange
 # text in gray
-@@ text in purple (and bold)@@
-
-
-
-
-
-```diff
-- text in red
-- text in red- text in red
-+ text in green
-! text in orange
-# text in gray
-@@ text in purple (and bold)@@
-
-```
+@@ text in purple (and bold)@@```
 
 
 
