@@ -2046,6 +2046,477 @@ the outputs.</td>
   <td style="width: 200px; word-wrap: break-word;">-</td>
   <td style="width: 200px; word-wrap: break-word;">310-311</td>
 </tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">195</td>
+  <td style="width: 50px; word-wrap: break-word;">gearchange</td>
+  <td style="width: 150px; word-wrap: break-word;">Select from one two speed ranges</td>
+  <td style="width: 150px; word-wrap: break-word;">The output will be a value scaled for the selected gear, and clamped to the min/max values for that gear.</td>
+  <td style="width: 200px; word-wrap: break-word;">gearchange.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">312</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">196</td>
+  <td style="width: 50px; word-wrap: break-word;">gladevcp</td>
+  <td style="width: 150px; word-wrap: break-word;">displays Virtual control Panels built with GTK / GLADE</td>
+  <td style="width: 150px; word-wrap: break-word;">loadusr gladevcp [−c componentname0xN] [−g WxH+Xoffset+Yoffset0xN] [−H halcmdfile] [−x win-
+dowid] gladefile.glade</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">314</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">197</td>
+  <td style="width: 50px; word-wrap: break-word;">gray2bin</td>
+  <td style="width: 150px; word-wrap: break-word;">convert a gray-code input to binary</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt gray2bin [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">Converts a gray-coded number into the corresponding binary value</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">315</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">198</td>
+  <td style="width: 50px; word-wrap: break-word;">hal_bb_gpio</td>
+  <td style="width: 150px; word-wrap: break-word;">Driver for beaglebone GPIO pins</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt hal_bb_gpio user_leds=#,...</td>
+  <td style="width: 200px; word-wrap: break-word;">The user_leds loadrt parameter controls which LEDs are available to HAL. Valid range: 0..3.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">316-317</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">199</td>
+  <td style="width: 50px; word-wrap: break-word;">histobins</td>
+  <td style="width: 150px; word-wrap: break-word;">histogram bins utility for scripts/hal-histogram</td>
+  <td style="width: 150px; word-wrap: break-word;">Read availablebins pin for the number of bins available.
+Set the minvalue, binsize, and nbins pins.</td>
+  <td style="width: 200px; word-wrap: break-word;">For nbins = N, the bins are numbered: 0 ... N−1</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">318-319</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">-</td>
+  <td style="width: 50px; word-wrap: break-word;">Mesa Electronics</td>
+  <td style="width: 150px; word-wrap: break-word;">-</td>
+  <td style="width: 150px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">200</td>
+  <td style="width: 50px; word-wrap: break-word;">hm2_7i43</td>
+  <td style="width: 150px; word-wrap: break-word;">LinuxCNC HAL driver for the Mesa Electronics 7i43 EPP Anything IO board with HostMot2 firmware.</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt hm2_7i43 [ioaddr=N[,N...]] [ioaddr_hi=N[,N...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">320-321</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">201</td>
+  <td style="width: 50px; word-wrap: break-word;">hm2_7i90</td>
+  <td style="width: 150px; word-wrap: break-word;">LinuxCNC HAL driver for the Mesa Electronics 7i90 EPP Anything IO board with HostMot2 firmware.</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt hm2_7i90 [ioaddr=N[,N...]] [ioaddr_hi=N[,N...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">323</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">202</td>
+  <td style="width: 50px; word-wrap: break-word;">hm2_eth</td>
+  <td style="width: 150px; word-wrap: break-word;">LinuxCNC HAL driver for the Mesa Electronics Ethernet Anything IO boards, with HostMot2 firmware.</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt hm2_eth [config="str[,str...]"] [board_ip=ip[,ip...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">324-326</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">202</td>
+  <td style="width: 50px; word-wrap: break-word;">hm2_pci</td>
+  <td style="width: 150px; word-wrap: break-word;">LinuxCNC HAL driver for the Mesa Electronics PCI-based Anything IO boards, with HostMot2 firmware.</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt hm2_pci [config="str[,str...]"]</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">327</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">203</td>
+  <td style="width: 50px; word-wrap: break-word;">hm2_rpspi</td>
+  <td style="width: 150px; word-wrap: break-word;">LinuxCNC HAL driver for the Mesa Electronics SPI Anything IO boards, with HostMot2 firmware.</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt hm2_rpspi</td>
+  <td style="width: 200px; word-wrap: break-word;">config [default: ""]</td>
+  <td style="width: 200px; word-wrap: break-word;">Specify the SPI clock rate in kHz. See SPI CLOCK RATES below.</td>
+  <td style="width: 200px; word-wrap: break-word;">328-330</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">204</td>
+  <td style="width: 50px; word-wrap: break-word;">hm2_spi</td>
+  <td style="width: 150px; word-wrap: break-word;">LinuxCNC HAL driver for the Mesa Electronics SPI Anything IO boards, with HostMot2 firmware.</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt hm2_spi [config="str[,str...]"]</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">331</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">205</td>
+  <td style="width: 50px; word-wrap: break-word;">hostmot2</td>
+  <td style="width: 150px; word-wrap: break-word;">LinuxCNC HAL driver for the Mesa Electronics HostMot2 firmware.</td>
+  <td style="width: 150px; word-wrap: break-word;">See the config modparam section below for Mesa card configuration. Typically hostmot2 is loaded with no parameters unless debugging is required.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">332-355</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">-</td>
+  <td style="width: 50px; word-wrap: break-word;">loadrt Function</td>
+  <td style="width: 150px; word-wrap: break-word;">-</td>
+  <td style="width: 150px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">206</td>
+  <td style="width: 50px; word-wrap: break-word;">hypot</td>
+  <td style="width: 150px; word-wrap: break-word;">Three-input hypotenuse (Euclidean distance) calculator</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt hypot [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">hypot.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">356</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">207</td>
+  <td style="width: 50px; word-wrap: break-word;">ilowpass</td>
+  <td style="width: 150px; word-wrap: break-word;">Low-pass filter with integer inputs and outputs</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt ilowpass [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">While it may find other applications, this component was written to create smoother motion while jogging with an MPG.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">357</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">208</td>
+  <td style="width: 50px; word-wrap: break-word;">integ</td>
+  <td style="width: 150px; word-wrap: break-word;">Integrator with gain pin and windup limits</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt integ [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">integ.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">358</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">209</td>
+  <td style="width: 50px; word-wrap: break-word;">invert</td>
+  <td style="width: 150px; word-wrap: break-word;">Compute the inverse of the input signal</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">The output will be the mathematical inverse of the input, ie out = 1/in. The parameter deadband can be used to control how close to 0 the denominator can be before the output is clamped to 0. deadband must be at least 1e-8, and must be positive.</td>
+  <td style="width: 200px; word-wrap: break-word;">359</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">210</td>
+  <td style="width: 50px; word-wrap: break-word;">joyhandle</td>
+  <td style="width: 150px; word-wrap: break-word;">sets nonlinear joypad movements, deadbands and scales</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt joyhandle [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">The component joyhandle uses the following formula for a non linear joypad movements: y = (scale * (a*xˆpower + b*x)) + offset</td>
+  <td style="width: 200px; word-wrap: break-word;">360</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">211</td>
+  <td style="width: 50px; word-wrap: break-word;">kins</td>
+  <td style="width: 150px; word-wrap: break-word;">kinematics definitions for LinuxCNC</td>
+  <td style="width: 150px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">361-365</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">212</td>
+  <td style="width: 50px; word-wrap: break-word;">knob2float</td>
+  <td style="width: 150px; word-wrap: break-word;">Convert counts (probably from an encoder) to a float value</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt knob2float [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">knob2float.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">366</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">213</td>
+  <td style="width: 50px; word-wrap: break-word;">latencybins</td>
+  <td style="width: 150px; word-wrap: break-word;">comp utility for scripts/latency-histogram</td>
+  <td style="width: 150px; word-wrap: break-word;">Read availablebins pin for the number of bins available.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">367</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">214</td>
+  <td style="width: 50px; word-wrap: break-word;">lcd</td>
+  <td style="width: 150px; word-wrap: break-word;">Stream HAL data to an LCD screen</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt lcd fmt_strings=""</td>
+  <td style="width: 200px; word-wrap: break-word;">lcd (requires a floating-point thread). All LCD instances are updated by the same function.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">368-370</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">215</td>
+  <td style="width: 50px; word-wrap: break-word;">limit1</td>
+  <td style="width: 150px; word-wrap: break-word;">Limit the output signal to fall between min and max</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt limit1 [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">limit1.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">371</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">216</td>
+  <td style="width: 50px; word-wrap: break-word;">limit2</td>
+  <td style="width: 150px; word-wrap: break-word;">Limit the output signal to fall between min and max and limit its slew rate to less than maxv per second.</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt limit2 [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">limit2.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">372</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">217</td>
+  <td style="width: 50px; word-wrap: break-word;">limit3</td>
+  <td style="width: 150px; word-wrap: break-word;">Follow input signal while obeying limits</td>
+  <td style="width: 150px; word-wrap: break-word;">limit3.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">373</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">218</td>
+  <td style="width: 50px; word-wrap: break-word;">lincurve</td>
+  <td style="width: 150px; word-wrap: break-word;">one-dimensional lookup table</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt lincurve [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">374</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">219</td>
+  <td style="width: 50px; word-wrap: break-word;">lineardeltakins</td>
+  <td style="width: 150px; word-wrap: break-word;">Kinematics for a linear delta robot</td>
+  <td style="width: 150px; word-wrap: break-word;">The kinematics model is appropriate for a rostock/kossel-style design with three joints arranged in an equi-lateral triangle.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">375</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">220</td>
+  <td style="width: 50px; word-wrap: break-word;">logic</td>
+  <td style="width: 150px; word-wrap: break-word;">LinuxCNC HAL component providing configurable logic functions</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt logic [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">General ‘logic function’ component. Can perform ‘and’, ‘or’, ‘nand’, ‘nor’ and ‘xor’ of up to 16 inputs.</td>
+  <td style="width: 200px; word-wrap: break-word;">376</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">221</td>
+  <td style="width: 50px; word-wrap: break-word;">lowpass</td>
+  <td style="width: 150px; word-wrap: break-word;">Low-pass filter</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt lowpass [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">lowpass.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">377</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">222</td>
+  <td style="width: 50px; word-wrap: break-word;">lut5</td>
+  <td style="width: 150px; word-wrap: break-word;">Arbitrary 5-input logic function based on a look-up table</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt lut5 [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">lut5 constructs a logic function with up to 5 inputs using a look-up table.</td>
+  <td style="width: 200px; word-wrap: break-word;">378-379</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">223</td>
+  <td style="width: 50px; word-wrap: break-word;">maj3</td>
+  <td style="width: 150px; word-wrap: break-word;">Compute the majority of 3 inputs</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt maj3 [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">maj3.N</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">380</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">224</td>
+  <td style="width: 50px; word-wrap: break-word;">match8</td>
+  <td style="width: 150px; word-wrap: break-word;">8-bit binary match detector</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt match8 [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">match8.N</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">381</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">225</td>
+  <td style="width: 50px; word-wrap: break-word;">matrix_kb</td>
+  <td style="width: 150px; word-wrap: break-word;">Convert integers to HAL pins. Optionally scan a matrix of IO ports to create those integers.</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt matrix_kb config=RxCs,RxCs... names=name1,name2...</td>
+  <td style="width: 200px; word-wrap: break-word;">Creates a component configured for R rows and N columns of matrix keyboard.
+</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">382-383</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">226</td>
+  <td style="width: 50px; word-wrap: break-word;">max31855</td>
+  <td style="width: 150px; word-wrap: break-word;">Support for the MAX31855 Thermocouple-to-Digital converter using bitbanged spi</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt max31855 [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">The component requires at least 3 pins to bitbang spi protocol,</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">384-385</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">227</td>
+  <td style="width: 50px; word-wrap: break-word;">mesa_7i65</td>
+  <td style="width: 150px; word-wrap: break-word;">Support for the Mesa 7i65 Octuple Servo Card</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt mesa_7i65</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">The component takes parameters in the form of a comma-separated list of bspi (buffered SPI) instances</td>
+  <td style="width: 200px; word-wrap: break-word;">386</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">228</td>
+  <td style="width: 50px; word-wrap: break-word;">mesa_pktgyro_test</td>
+  <td style="width: 150px; word-wrap: break-word;">PktUART simple test with Microstrain 3DM-GX3-15 gyro</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt mesa_pktgyro_test [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">387</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">229</td>
+  <td style="width: 50px; word-wrap: break-word;">message</td>
+  <td style="width: 150px; word-wrap: break-word;">Display a message</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt message [count=N|names=name1[,name2...]] [messages=N]</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">The messages to display. These should be listed, comma-delimited, inside a single set of quotes.</td>
+  <td style="width: 200px; word-wrap: break-word;">388</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">230</td>
+  <td style="width: 50px; word-wrap: break-word;">minmax</td>
+  <td style="width: 150px; word-wrap: break-word;">Track the minimum and maximum values of the input to the outputs</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt minmax [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">minmax.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">389</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">231</td>
+  <td style="width: 50px; word-wrap: break-word;">motion</td>
+  <td style="width: 150px; word-wrap: break-word;">accepts NML motion commands, interacts with HAL in realtime</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt motmod [base_period_nsec=period] [base_thread_fp=0 or 1]</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">390-399</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">232</td>
+  <td style="width: 50px; word-wrap: break-word;">moveoff</td>
+  <td style="width: 150px; word-wrap: break-word;">Component for Hal-only offsets</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt moveoff [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">The moveoff component is used to offset joint positions using custom Hal connections.</td>
+  <td style="width: 200px; word-wrap: break-word;">400-402</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">233</td>
+  <td style="width: 50px; word-wrap: break-word;">mult2</td>
+  <td style="width: 150px; word-wrap: break-word;">Product of two inputs</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt mult2 [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">mult2.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">403</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">234</td>
+  <td style="width: 50px; word-wrap: break-word;">multiclick</td>
+  <td style="width: 150px; word-wrap: break-word;">Single-, double-, triple-, and quadruple-click detector</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt multiclick [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">A click is defined as a rising edge on the ’in’ pin, </td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">404-405</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">235</td>
+  <td style="width: 50px; word-wrap: break-word;">multiswitch</td>
+  <td style="width: 150px; word-wrap: break-word;">This component toggles between a specified number of output bits</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt multiswitch personality=P [cfg=N]</td>
+  <td style="width: 200px; word-wrap: break-word;">multiswitch.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">406</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">236</td>
+  <td style="width: 50px; word-wrap: break-word;">mux16</td>
+  <td style="width: 150px; word-wrap: break-word;">Select from one of sixteen input values</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt mux16 [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">mux16.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">407</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">237</td>
+  <td style="width: 50px; word-wrap: break-word;">mux2</td>
+  <td style="width: 150px; word-wrap: break-word;">Select from one of two input values</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt mux2 [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">mux2.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">408</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">238</td>
+  <td style="width: 50px; word-wrap: break-word;">mux4</td>
+  <td style="width: 150px; word-wrap: break-word;">Select from one of four input values</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt mux4 [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">mux4.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">409</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">239</td>
+  <td style="width: 50px; word-wrap: break-word;">mux8</td>
+  <td style="width: 150px; word-wrap: break-word;">Select from one of eight input values</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt mux8 [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">mux8.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">410</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">240</td>
+  <td style="width: 50px; word-wrap: break-word;">mux_generic</td>
+  <td style="width: 150px; word-wrap: break-word;">choose one from several input values</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt mux_generic config="bb8,fu12...."</td>
+  <td style="width: 200px; word-wrap: break-word;">mux−gen.NN Depending on the data types can run in either a floating</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">411-412</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">241</td>
+  <td style="width: 50px; word-wrap: break-word;">near</td>
+  <td style="width: 150px; word-wrap: break-word;">Determine whether two values are roughly equal.</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt near [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">near.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">413</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">242</td>
+  <td style="width: 50px; word-wrap: break-word;">not</td>
+  <td style="width: 150px; word-wrap: break-word;">Inverter</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt not [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">414</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">243</td>
+  <td style="width: 50px; word-wrap: break-word;">offset</td>
+  <td style="width: 150px; word-wrap: break-word;">Adds an offset to an input, and subtracts it from the feedback value</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt offset [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">offset.N.update-output (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">415</td>
+</tr>
 
 
 
