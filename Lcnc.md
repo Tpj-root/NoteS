@@ -1659,13 +1659,392 @@ POSIX threads and RTAI are supported.</td>
   <td style="width: 200px; word-wrap: break-word;">250-253</td>
 </tr>
   <tr>
-  <td style="width: 50px; word-wrap: break-word;">15</td>
-  <td style="width: 50px; word-wrap: break-word;">rtapi</td>
-  <td style="width: 150px; word-wrap: break-word;">RTAPI</td>
-  <td style="width: 150px; word-wrap: break-word;">include</td>
+  <td style="width: 50px; word-wrap: break-word;">153</td>
+  <td style="width: 50px; word-wrap: break-word;">axistest</td>
+  <td style="width: 150px; word-wrap: break-word;">Used to allow testing of an axis. Used IN PNCconf</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt axistest [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">254</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">154</td>
+  <td style="width: 50px; word-wrap: break-word;">bin2gray</td>
+  <td style="width: 150px; word-wrap: break-word;">convert a number to the gray-code representation</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt bin2gray [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">255</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">155</td>
+  <td style="width: 50px; word-wrap: break-word;">biquad</td>
+  <td style="width: 150px; word-wrap: break-word;">Biquad IIR filter</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt biquad [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">Biquad IIR filter. Implements the following transfer function: H(z) = (n0 + n1z-1 + n2z-2) / (1+ d1z-1 +
+d2z-2)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">256-257</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">156</td>
+  <td style="width: 50px; word-wrap: break-word;">bitslice</td>
+  <td style="width: 150px; word-wrap: break-word;">Converts an unsigned-32 input into individual bits</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt bitslice [count=N|names=name1[,name2...]] [personality=P,P,...]</td>
+  <td style="width: 200px; word-wrap: break-word;">This component creates individual bit-outputs for each bit of an unsigned-32 input. The number of bits can
+be limited by the "personality" modparam. </td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">258</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">157</td>
+  <td style="width: 50px; word-wrap: break-word;">bitwise</td>
+  <td style="width: 150px; word-wrap: break-word;">Computes various bitwise operations on the two input values</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt bitwise [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">bitwise.N</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">259</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">158</td>
+  <td style="width: 50px; word-wrap: break-word;">bldc</td>
+  <td style="width: 150px; word-wrap: break-word;">BLDC and AC-servo control component</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt bldc cfg=qi6,aH</td>
+  <td style="width: 200px; word-wrap: break-word;">This component is designed as an interface between the most common forms of three-phase motor feed-
+back devices and the corresponding types of drive. However there is no requirement that the motor and
+drive should necessarily be of inherently compatible types.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">260-266</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">159</td>
+  <td style="width: 50px; word-wrap: break-word;">blend</td>
+  <td style="width: 150px; word-wrap: break-word;">Perform linear interpolation between two values</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt blend [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">blend.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">267</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">160</td>
+  <td style="width: 50px; word-wrap: break-word;">carousel</td>
+  <td style="width: 150px; word-wrap: break-word;">Orient a toolchanger carousel using various encoding schemes</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt carousel pockets=N[,N] encoding=ssss[,sss] num_sense=N[,N] dir=N[,N]</td>
   <td style="width: 200px; word-wrap: break-word;">ininn</td>
   <td style="width: 200px; word-wrap: break-word;">-</td>
-  <td style="width: 200px; word-wrap: break-word;">2</td>
+  <td style="width: 200px; word-wrap: break-word;">268-270</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">161</td>
+  <td style="width: 50px; word-wrap: break-word;">charge_pump</td>
+  <td style="width: 150px; word-wrap: break-word;">Create a square-wave for the ’charge pump’ input of some controller boards</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt charge_pump</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">271</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">162</td>
+  <td style="width: 50px; word-wrap: break-word;">clarke2</td>
+  <td style="width: 150px; word-wrap: break-word;">Two input version of Clarke transform</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt clarke2 [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">The Clarke transform can be used to translate a vector quantity from a three phase system (three compo-
+nents 120 degrees apart) to a two phase Cartesian system.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">272</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">163</td>
+  <td style="width: 50px; word-wrap: break-word;">clarke3</td>
+  <td style="width: 150px; word-wrap: break-word;">Clarke (3 phase to cartesian) transform</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt clarke3 [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">273</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">164</td>
+  <td style="width: 50px; word-wrap: break-word;">clarkeinv</td>
+  <td style="width: 150px; word-wrap: break-word;">Inverse Clarke transform</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt clarkeinv [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">The inverse Clarke transform can be used rotate a vector quantity and then translate it from Cartesian coor-
+dinate system to a three phase system (three components 120 degrees apart).</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">274</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">165</td>
+  <td style="width: 50px; word-wrap: break-word;">classicladder</td>
+  <td style="width: 150px; word-wrap: break-word;">realtime software plc based on ladder logic</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt classicladder_rt [numRungs=N] [numBits=N] [numWords=N] [numTimers=N] [numMonosta-
+bles=N] [numCounters=N] [numPhysInputs=N] [numPhysOutputs=N] [numArithmExpr=N] [num-
+Sections=N] [numSymbols=N] [numS32in=N] [numS32out=N] [numFloatIn=N] [numFloatOut=N]</td>
+  <td style="width: 200px; word-wrap: break-word;">These pins and parameters are created by the realtime classicladder_rt module. Each period (minimum
+1000000 ns), classicladder reads the inputs, evaluates the ladder logic defined in the GUI, and then writes
+the outputs.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">275-276</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">166</td>
+  <td style="width: 50px; word-wrap: break-word;">comp</td>
+  <td style="width: 150px; word-wrap: break-word;">Two input comparator with hysteresis</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt comp [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">comp.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">277</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">167</td>
+  <td style="width: 50px; word-wrap: break-word;">constant</td>
+  <td style="width: 150px; word-wrap: break-word;">Use a parameter to set the value of a pin</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt constant [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">constant.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">278</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">168</td>
+  <td style="width: 50px; word-wrap: break-word;">conv_bit_float</td>
+  <td style="width: 150px; word-wrap: break-word;">Convert a value from bit to float</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt conv_bit_float [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">conv-bit-float.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">279</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">169</td>
+  <td style="width: 50px; word-wrap: break-word;">conv_bit_s32</td>
+  <td style="width: 150px; word-wrap: break-word;">Convert a value from bit to s32</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt conv_bit_s32 [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">conv-bit-s32.N</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">280</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">170</td>
+  <td style="width: 50px; word-wrap: break-word;">conv_bit_u32</td>
+  <td style="width: 150px; word-wrap: break-word;">Convert a value from bit to u32</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt conv_bit_u32 [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">conv-bit-u32.N</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">281</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">171</td>
+  <td style="width: 50px; word-wrap: break-word;">conv_float_s32</td>
+  <td style="width: 150px; word-wrap: break-word;">Convert a value from float to s32</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt conv_float_s32 [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">conv-float-s32.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">282</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">172</td>
+  <td style="width: 50px; word-wrap: break-word;">conv_float_u32</td>
+  <td style="width: 150px; word-wrap: break-word;">Convert a value from float to u32</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt conv_float_u32 [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">conv-float-u32.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">283</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">173</td>
+  <td style="width: 50px; word-wrap: break-word;">conv_s32_bit</td>
+  <td style="width: 150px; word-wrap: break-word;">Convert a value from s32 to bit</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt conv_s32_bit [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">conv-s32-bit.N</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">284</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">174</td>
+  <td style="width: 50px; word-wrap: break-word;">conv_s32_float</td>
+  <td style="width: 150px; word-wrap: break-word;">Convert a value from s32 to float</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt conv_s32_float [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">conv-s32-float.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">285</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">175</td>
+  <td style="width: 50px; word-wrap: break-word;">conv_s32_u32</td>
+  <td style="width: 150px; word-wrap: break-word;">Convert a value from s32 to u32</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt conv_s32_u32 [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">conv-s32-u32.N</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">286</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">176</td>
+  <td style="width: 50px; word-wrap: break-word;">conv_u32_bit</td>
+  <td style="width: 150px; word-wrap: break-word;">Convert a value from u32 to bit</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt conv_u32_bit [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">conv-u32-bit.N</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">287</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">177</td>
+  <td style="width: 50px; word-wrap: break-word;">conv_u32_float</td>
+  <td style="width: 150px; word-wrap: break-word;">Convert a value from u32 to float</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt conv_u32_float [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">conv-u32-float.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">288</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">178</td>
+  <td style="width: 50px; word-wrap: break-word;">conv_u32_s32</td>
+  <td style="width: 150px; word-wrap: break-word;">Convert a value from u32 to s32</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt conv_u32_s32 [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">conv-u32-s32.N</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">289</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">179</td>
+  <td style="width: 50px; word-wrap: break-word;">corexy_by_hal</td>
+  <td style="width: 150px; word-wrap: break-word;">CoreXY kinematics</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt corexy_by_hal [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">Implement CoreXY forward and inverse transformations in HAL. This component provides an alternative method for implementing CoreXY kinematics.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">290-291</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">180</td>
+  <td style="width: 50px; word-wrap: break-word;">counter</td>
+  <td style="width: 150px; word-wrap: break-word;">counts input pulses (DEPRECATED)</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt counter [num_chan=N]</td>
+  <td style="width: 200px; word-wrap: break-word;">counter is a deprecated HAL component and will be removed in a future release. Use the encoder component with encoder.X.counter−mode set to TRUE.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">292</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">181</td>
+  <td style="width: 50px; word-wrap: break-word;">dbounce</td>
+  <td style="width: 150px; word-wrap: break-word;">alternative debounce component</td>
+  <td style="width: 150px; word-wrap: break-word;">This component is similar to the debounce component (man debounce) but uses settable delay pins for each instance and supports count= or names= parameters</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">293</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">182</td>
+  <td style="width: 50px; word-wrap: break-word;">ddt</td>
+  <td style="width: 150px; word-wrap: break-word;">Compute the derivative of the input function</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt ddt [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">294</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">183</td>
+  <td style="width: 50px; word-wrap: break-word;">deadzone</td>
+  <td style="width: 150px; word-wrap: break-word;">Return the center if within the threshold</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt deadzone [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">deadzone.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">295</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">184</td>
+  <td style="width: 50px; word-wrap: break-word;">debounce</td>
+  <td style="width: 150px; word-wrap: break-word;">filter noisy digital inputs</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt debounce cfg=size[,size,...]</td>
+  <td style="width: 200px; word-wrap: break-word;">Creates debounce groups with the number of filters specified by (size). Every filter in the same group has the same sample rate and delay. For example cfg=2,3 creates two filter groups with 2 filters in the first group and 3 filters in the second group.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">296</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">185</td>
+  <td style="width: 50px; word-wrap: break-word;">demux</td>
+  <td style="width: 150px; word-wrap: break-word;">Select one of several output pins by integer and/or or individual bits.</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt demux [count=N|names=name1[,name2...]] [personality=P,P,...]</td>
+  <td style="width: 200px; word-wrap: break-word;">This component creates a number of output bits defined by the "personality" command-line parameter. </td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">297</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">186</td>
+  <td style="width: 50px; word-wrap: break-word;">differential</td>
+  <td style="width: 150px; word-wrap: break-word;">kinematics for a differential transmission</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt differential [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">differential.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">298</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">187</td>
+  <td style="width: 50px; word-wrap: break-word;">edge</td>
+  <td style="width: 150px; word-wrap: break-word;">Edge detector</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt edge [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">edge.N Produce output pulses from input edges</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">299</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">188</td>
+  <td style="width: 50px; word-wrap: break-word;">encoder</td>
+  <td style="width: 150px; word-wrap: break-word;">software counting of quadrature encoder signals</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt encoder [num_chan=num | names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">encoder is used to measure position by counting the pulses generated by a quadrature encoder.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">300-302</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">189</td>
+  <td style="width: 50px; word-wrap: break-word;">encoder_ratio</td>
+  <td style="width: 150px; word-wrap: break-word;">an electronic gear to synchronize two axes</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt encoder_ratio [num_chan=num | names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">encoder_ratio can be used to synchronize two axes (like an "electronic gear").</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">303-304</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">190</td>
+  <td style="width: 50px; word-wrap: break-word;">eoffset_per_angle</td>
+  <td style="width: 150px; word-wrap: break-word;">Compute External Offset Per Angle</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt eoffset_per_angle [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">An offset is computed (from one of several functions) based on an input angle in degrees. The angle could be a rotary coordinate value or a spindle angle.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">305-306</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">191</td>
+  <td style="width: 50px; word-wrap: break-word;">estop_latch</td>
+  <td style="width: 150px; word-wrap: break-word;">Software ESTOP latch</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt estop_latch [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">This component can be used as a part of a simple software ESTOP chain.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">307</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">192</td>
+  <td style="width: 50px; word-wrap: break-word;">feedcomp</td>
+  <td style="width: 150px; word-wrap: break-word;">Multiply the input by the ratio of current velocity to the feed rate</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt feedcomp [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">feedcomp.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">308</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">193</td>
+  <td style="width: 50px; word-wrap: break-word;">flipflop</td>
+  <td style="width: 150px; word-wrap: break-word;">D type flip-flop</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt flipflop [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">309</td>
+</tr>
+  <tr>
+  <td style="width: 50px; word-wrap: break-word;">194</td>
+  <td style="width: 50px; word-wrap: break-word;">gantry</td>
+  <td style="width: 150px; word-wrap: break-word;">LinuxCNC HAL component for driving multiple joints from a single axis</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt gantry [count=N|names=name1[,name2...]] [personality=P,P,...]</td>
+  <td style="width: 200px; word-wrap: break-word;">Drives multiple physical motors (joints) from a single axis input</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">310-311</td>
 </tr>
 
 
