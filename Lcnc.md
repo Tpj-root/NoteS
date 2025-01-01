@@ -2517,6 +2517,187 @@ Set the minvalue, binsize, and nbins pins.</td>
   <td style="width: 200px; word-wrap: break-word;">-</td>
   <td style="width: 200px; word-wrap: break-word;">415</td>
 </tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">244</td>
+  <td style="width: 50px; word-wrap: break-word;">ohmic</td>
+  <td style="width: 150px; word-wrap: break-word;">LinuxCNC HAL component that uses a Mesa THCAD for Ohmic sensing</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt ohmic [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">416-417</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">245</td>
+  <td style="width: 50px; word-wrap: break-word;">oneshot</td>
+  <td style="width: 150px; word-wrap: break-word;">one-shot pulse generator</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt oneshot [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">creates a variable-length output pulse when the input changes state.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">418</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">246</td>
+  <td style="width: 50px; word-wrap: break-word;">opto_ac5</td>
+  <td style="width: 150px; word-wrap: break-word;">Realtime driver for opto22 PCI-AC5 cards</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt opto_ac5 [portconfig0=0xN] [portconfig1=0xN]</td>
+  <td style="width: 200px; word-wrap: break-word;">These pins and parameters are created by the realtime opto_ac5 module.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">419-420</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">247</td>
+  <td style="width: 50px; word-wrap: break-word;">or2</td>
+  <td style="width: 150px; word-wrap: break-word;">Two-input OR gate</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt or2 [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">or2.N</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">421</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">248</td>
+  <td style="width: 50px; word-wrap: break-word;">orient</td>
+  <td style="width: 150px; word-wrap: break-word;">Provide a PID command input for orientation mode based on current spindle position, target angle and orient mode</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt orient [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">422-423</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">249</td>
+  <td style="width: 50px; word-wrap: break-word;">pid</td>
+  <td style="width: 150px; word-wrap: break-word;">proportional/integral/derivative controller</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt pid [num_chan=num | names=name1[,name2...]] [debug=dbg]</td>
+  <td style="width: 200px; word-wrap: break-word;">pid is a classic Proportional/Integral/Derivative controller, used to control position or speed feedback loops for servo motors and other closed-loop applications.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">424-427</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">250</td>
+  <td style="width: 50px; word-wrap: break-word;">plasmac</td>
+  <td style="width: 150px; word-wrap: break-word;">A plasma cutter controller</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt plasmac</td>
+  <td style="width: 200px; word-wrap: break-word;">A plasma cutting table control component for use with the LinuxCNC V2.8 or later.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">428-434</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">251</td>
+  <td style="width: 50px; word-wrap: break-word;">pwmgen</td>
+  <td style="width: 150px; word-wrap: break-word;">software PWM/PDM generation</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt pwmgen output_type=type0[,type1...]</td>
+  <td style="width: 200px; word-wrap: break-word;">pwmgen is used to generate PWM (pulse width modulation) or PDM (pulse density modulation) signals.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">435-436</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">252</td>
+  <td style="width: 50px; word-wrap: break-word;">rosekins</td>
+  <td style="width: 150px; word-wrap: break-word;">Kinematics for a rose engine</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt rosekins</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">437</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">253</td>
+  <td style="width: 50px; word-wrap: break-word;">sample_hold</td>
+  <td style="width: 150px; word-wrap: break-word;">Sample and Hold</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt sample_hold [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">sample-hold.N</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">438</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">254</td>
+  <td style="width: 50px; word-wrap: break-word;">sampler</td>
+  <td style="width: 150px; word-wrap: break-word;">sample data from HAL in real time</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt sampler depth=depth1[,depth2...] cfg=string1[,string2...]</td>
+  <td style="width: 200px; word-wrap: break-word;">sampler and halsampler(1) are used together to sample HAL data in real time and store it in a file.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">439-440</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">255</td>
+  <td style="width: 50px; word-wrap: break-word;">scale</td>
+  <td style="width: 150px; word-wrap: break-word;">LinuxCNC HAL component that applies a scale and offset to its input</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt scale [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">scale.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">441</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">256</td>
+  <td style="width: 50px; word-wrap: break-word;">select8</td>
+  <td style="width: 150px; word-wrap: break-word;">8-bit binary match detector</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt select8 [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">select8.N</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">442</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">257</td>
+  <td style="width: 50px; word-wrap: break-word;">serport</td>
+  <td style="width: 150px; word-wrap: break-word;">Hardware driver for the digital I/O bits of the 8250 and 16550 serial port.</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt serport io=addr[,addr...]</td>
+  <td style="width: 200px; word-wrap: break-word;">The pin numbers refer to the 9-pin serial pinout. Keep in mind that these ports generally use rs232 voltages, not 0/5V signals.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">443-444</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">258</td>
+  <td style="width: 50px; word-wrap: break-word;">setsserial</td>
+  <td style="width: 150px; word-wrap: break-word;">a utility for setting Smart Serial NVRAM parameters.</td>
+  <td style="width: 150px; word-wrap: break-word;">This rather clunky utility is no longer needed except for flashing new smart-serial remote firmware. 
+</td>
+  <td style="width: 200px; word-wrap: break-word;">loadrt setsserial cmd="set hm2_8i20.001f.nvmaxcurrent 750"</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">445-446</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">259</td>
+  <td style="width: 50px; word-wrap: break-word;">siggen</td>
+  <td style="width: 150px; word-wrap: break-word;">signal generator</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt siggen [num_chan=num | names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">siggen is a signal generator that can be used for testing and other applications that need simple waveforms.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">447-448</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">260</td>
+  <td style="width: 50px; word-wrap: break-word;">sim_axis_hardware</td>
+  <td style="width: 150px; word-wrap: break-word;">A component to simulate home and limit switches</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt sim_axis_hardware [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">This component creates simulated home and limit switches based on the current position.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">449-451</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">261</td>
+  <td style="width: 50px; word-wrap: break-word;">sim_encoder</td>
+  <td style="width: 150px; word-wrap: break-word;">simulated quadrature encoder</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt sim_encoder [num_chan=num | names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">sim_encoder can generate quadrature signals as if from an encoder. It also generates an index pulse once per revolution. </td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">452-453</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">262</td>
+  <td style="width: 50px; word-wrap: break-word;">sim_home_switch</td>
+  <td style="width: 150px; word-wrap: break-word;">Simple home switch simulator</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt sim_home_switch [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">After tripping home switch, travel in opposite direction is required (amount set by the hysteresis pin)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">454</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">263</td>
+  <td style="width: 50px; word-wrap: break-word;">sim_matrix_kb</td>
+  <td style="width: 150px; word-wrap: break-word;">convert HAL pin inputs to keycodes</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt sim_matrix_kb [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">sim-matrix-kb.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">455</td>
+</tr>
 
 
 
