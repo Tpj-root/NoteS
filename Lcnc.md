@@ -2698,6 +2698,277 @@ Set the minvalue, binsize, and nbins pins.</td>
   <td style="width: 200px; word-wrap: break-word;">-</td>
   <td style="width: 200px; word-wrap: break-word;">455</td>
 </tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">264</td>
+  <td style="width: 50px; word-wrap: break-word;">sim_parport</td>
+  <td style="width: 150px; word-wrap: break-word;">A component to simulate the pins of the hal_parport component</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt sim_parport [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">Sim_parport is used to replace the pins of a real parport without changing any of the pins names in the rest of the config.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">456-458</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">265</td>
+  <td style="width: 50px; word-wrap: break-word;">sim_spindle</td>
+  <td style="width: 150px; word-wrap: break-word;">Simulated spindle with index pulse</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt sim_spindle [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">sim-spindle.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">459</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">266</td>
+  <td style="width: 50px; word-wrap: break-word;">simple_tp</td>
+  <td style="width: 150px; word-wrap: break-word;">This component is a single axis simple trajectory planner, same as used for jogging in linuxcnc.</td>
+  <td style="width: 150px; word-wrap: break-word;">Used by PNCconf to allow testing of acceleration and velocity values for an axis.</td>
+  <td style="width: 200px; word-wrap: break-word;">simple-tp.N.update (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">460</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">267</td>
+  <td style="width: 50px; word-wrap: break-word;">sphereprobe</td>
+  <td style="width: 150px; word-wrap: break-word;">Probe a pretend hemisphere</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt sphereprobe [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">sphereprobe.N</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">461</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">268</td>
+  <td style="width: 50px; word-wrap: break-word;">spindle</td>
+  <td style="width: 150px; word-wrap: break-word;">Control a spindle with different acceleration and deceleration and optional gear change scaling</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt spindle [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">This component will control a spindle with adjustable acceleration and deceleration.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">462-464</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">269</td>
+  <td style="width: 50px; word-wrap: break-word;">spindle_monitor</td>
+  <td style="width: 150px; word-wrap: break-word;">spindle at-speed and underspeed detection</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt spindle_monitor [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">spindle-monitor.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">465</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">270</td>
+  <td style="width: 50px; word-wrap: break-word;">hostmot2</td>
+  <td style="width: 150px; word-wrap: break-word;">Smart Serial LinuxCNC HAL driver for the Mesa Electronics HostMot2 Smart-Serial remote cards</td>
+  <td style="width: 150px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">466-474</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">271</td>
+  <td style="width: 50px; word-wrap: break-word;">stepgen</td>
+  <td style="width: 150px; word-wrap: break-word;">software step pulse generation</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt stepgen step_type=type0[,type1...] [ctrl_type=type0[,type1...]] [user_step_type=#,#...]</td>
+  <td style="width: 200px; word-wrap: break-word;">stepgen is used to control stepper motors. The maximum step rate depends on the CPU and other factors, and is usually in the range of 5KHz to 25KHz. If higher rates are needed, a hardware step generator is a better choice.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">475-478</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">272</td>
+  <td style="width: 50px; word-wrap: break-word;">steptest</td>
+  <td style="width: 150px; word-wrap: break-word;">Used by Stepconf to allow testing of acceleration and velocity values for an axis.</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt steptest [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">steptest.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">479</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">273</td>
+  <td style="width: 50px; word-wrap: break-word;">streamer</td>
+  <td style="width: 150px; word-wrap: break-word;">stream file data into HAL in real time</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt streamer depth=depth1[,depth2...] cfg=string1[,string2...]</td>
+  <td style="width: 200px; word-wrap: break-word;">streamer is a realtime HAL component that exports HAL pins and creates a FIFO in shared memory.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">480-481</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">274</td>
+  <td style="width: 50px; word-wrap: break-word;">sum2</td>
+  <td style="width: 150px; word-wrap: break-word;">Sum of two inputs (each with a gain) and an offset</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt sum2 [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">sum2.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">482</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">275</td>
+  <td style="width: 50px; word-wrap: break-word;">supply</td>
+  <td style="width: 150px; word-wrap: break-word;">set output pins with values from parameters (obsolete)</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt supply num_chan=num</td>
+  <td style="width: 200px; word-wrap: break-word;">supply was used to allow the inputs of other HAL components to be manipulated for testing purposes.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">483</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">276</td>
+  <td style="width: 50px; word-wrap: break-word;">thc</td>
+  <td style="width: 150px; word-wrap: break-word;">Torch Height Control</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt thc</td>
+  <td style="width: 200px; word-wrap: break-word;">Torch Height Control Mesa THC > Encoder > LinuxCNC THC component</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">484-485</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">277</td>
+  <td style="width: 50px; word-wrap: break-word;">thcud</td>
+  <td style="width: 150px; word-wrap: break-word;">Torch Height Control Up/Down Input</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt thcud</td>
+  <td style="width: 200px; word-wrap: break-word;">Torch Height Control This THC takes either an up or a down input from a THC</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">486-487</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">278</td>
+  <td style="width: 50px; word-wrap: break-word;">threads</td>
+  <td style="width: 150px; word-wrap: break-word;">creates hard realtime HAL threads</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt threads name1=name period1=period [fp1=<0|1>] [<thread-2-info>] [<thread-3-info>]</td>
+  <td style="width: 200px; word-wrap: break-word;">threads is used to create hard realtime threads which can execute HAL functions at specific intervals</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">488</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">279</td>
+  <td style="width: 50px; word-wrap: break-word;">threadtest</td>
+  <td style="width: 150px; word-wrap: break-word;">LinuxCNC HAL component for testing thread behavior</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt threadtest [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">threadtest.N.increment</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">489</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">280</td>
+  <td style="width: 50px; word-wrap: break-word;">time</td>
+  <td style="width: 150px; word-wrap: break-word;">Time on in Hours, Minutes, Seconds</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt time [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">When either the time.N.start or time.N.pause bits goes true the cycle timer resets and starts to time until</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">490-491</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">281</td>
+  <td style="width: 50px; word-wrap: break-word;">timedelay</td>
+  <td style="width: 150px; word-wrap: break-word;">The equivalent of a time-delay relay</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt timedelay [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">timedelay.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">492</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">282</td>
+  <td style="width: 50px; word-wrap: break-word;">timedelta</td>
+  <td style="width: 150px; word-wrap: break-word;">LinuxCNC HAL component that measures thread scheduling timing behavior</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt timedelta [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">timedelta.N</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">493</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">283</td>
+  <td style="width: 50px; word-wrap: break-word;">toggle</td>
+  <td style="width: 150px; word-wrap: break-word;">’push-on, push-off’ from momentary pushbuttons</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt toggle [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">toggle.N</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">494</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">284</td>
+  <td style="width: 50px; word-wrap: break-word;">toggle2nist</td>
+  <td style="width: 150px; word-wrap: break-word;">toggle button to nist logic</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt toggle2nist [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">Toggle2nist can be used with a momentary push button to control a device that has separate on and off inputs and an is-on output.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">495</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">285</td>
+  <td style="width: 50px; word-wrap: break-word;">tristate_bit</td>
+  <td style="width: 150px; word-wrap: break-word;">Place a signal on an I/O pin only when enabled, similar to a tristate buffer in electronics</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt tristate_bit [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">tristate-bit.N</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">496</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">286</td>
+  <td style="width: 50px; word-wrap: break-word;">tristate_float</td>
+  <td style="width: 150px; word-wrap: break-word;">Place a signal on an I/O pin only when enabled, similar to a tristate buffer in electronics</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt tristate_float [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">tristate-float.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">497</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">287</td>
+  <td style="width: 50px; word-wrap: break-word;">updown</td>
+  <td style="width: 150px; word-wrap: break-word;">Counts up or down, with optional limits and wraparound behavior</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt updown [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">updown.N</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">498</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">288</td>
+  <td style="width: 50px; word-wrap: break-word;">userkins</td>
+  <td style="width: 150px; word-wrap: break-word;">Template for user-built kinematics</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt userkins [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">The userkins.comp file is a template for creating kinematics that can be user-built using halcompile.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">499</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">289</td>
+  <td style="width: 50px; word-wrap: break-word;">watchdog</td>
+  <td style="width: 150px; word-wrap: break-word;">monitor multiple inputs for a "heartbeat"</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt watchdog num_inputs=N</td>
+  <td style="width: 200px; word-wrap: break-word;">You must specify the number of inputs, from 1 to 32. Each input has a separate timeout value.</td>
+  <td style="width: 200px; word-wrap: break-word;">Check all input pins for transitions, clear the ok−out pin if any input has no transition within its timeout period. </td>
+  <td style="width: 200px; word-wrap: break-word;">500</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">290</td>
+  <td style="width: 50px; word-wrap: break-word;">wcomp</td>
+  <td style="width: 150px; word-wrap: break-word;">Window comparator</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt wcomp [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">wcomp.N (requires a floating-point thread)</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">501</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">291</td>
+  <td style="width: 50px; word-wrap: break-word;">weighted_sum</td>
+  <td style="width: 150px; word-wrap: break-word;">convert a group of bits to an integer</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt weighted_sum wsum_sizes=size[,size,...]</td>
+  <td style="width: 200px; word-wrap: break-word;">Creates weighted sum groups each with the given number of input bits (size).</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">502</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">292</td>
+  <td style="width: 50px; word-wrap: break-word;">xhc_hb04_util</td>
+  <td style="width: 150px; word-wrap: break-word;">xhc-hb04 convenience utility</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt xhc_hb04_util [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">Provides logic for a start/pause button and an interface to halui.program.is_paused, is_idle, is_running to generate outputs for halui.program.pause, resume, run.</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">503</td>
+</tr>
+<tr>
+  <td style="width: 50px; word-wrap: break-word;">293</td>
+  <td style="width: 50px; word-wrap: break-word;">xor2</td>
+  <td style="width: 150px; word-wrap: break-word;">Two-input XOR (exclusive OR) gate</td>
+  <td style="width: 150px; word-wrap: break-word;">loadrt xor2 [count=N|names=name1[,name2...]]</td>
+  <td style="width: 200px; word-wrap: break-word;">xor2.N</td>
+  <td style="width: 200px; word-wrap: break-word;">-</td>
+  <td style="width: 200px; word-wrap: break-word;">504</td>
+</tr>
+
 
 
 
