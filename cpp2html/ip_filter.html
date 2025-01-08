@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>ip_filter.cpp</title>
+<link rel="stylesheet" type="text/css" href="highlight.css">
+</head>
+<body class="hl">
+<pre class="hl"><span class="hl com">/*</span>
+<span class="hl com"></span>
+<span class="hl com">Copyright (c) 2005-2007, 2016-2017, 2019-2020, Arvid Norberg</span>
+<span class="hl com">Copyright (c) 2017-2018, 2020, Alden Torres</span>
+<span class="hl com">All rights reserved.</span>
+<span class="hl com"></span>
+<span class="hl com">Redistribution and use in source and binary forms, with or without</span>
+<span class="hl com">modification, are permitted provided that the following conditions</span>
+<span class="hl com">are met:</span>
+<span class="hl com"></span>
+<span class="hl com">    * Redistributions of source code must retain the above copyright</span>
+<span class="hl com">      notice, this list of conditions and the following disclaimer.</span>
+<span class="hl com">    * Redistributions in binary form must reproduce the above copyright</span>
+<span class="hl com">      notice, this list of conditions and the following disclaimer in</span>
+<span class="hl com">      the documentation and/or other materials provided with the distribution.</span>
+<span class="hl com">    * Neither the name of the author nor the names of its</span>
+<span class="hl com">      contributors may be used to endorse or promote products derived</span>
+<span class="hl com">      from this software without specific prior written permission.</span>
+<span class="hl com"></span>
+<span class="hl com">THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;</span>
+<span class="hl com">AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE</span>
+<span class="hl com">IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE</span>
+<span class="hl com">ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE</span>
+<span class="hl com">LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR</span>
+<span class="hl com">CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF</span>
+<span class="hl com">SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS</span>
+<span class="hl com">INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN</span>
+<span class="hl com">CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)</span>
+<span class="hl com">ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span>
+<span class="hl com">POSSIBILITY OF SUCH DAMAGE.</span>
+<span class="hl com"></span>
+<span class="hl com">*/</span>
+
+<span class="hl ppc">#include &lt;iterator&gt;</span> <span class="hl slc">// for next</span>
+<span class="hl ppc"></span>
+<span class="hl ppc">#include</span> <span class="hl pps">&quot;libtorrent/ip_filter.hpp&quot;</span><span class="hl ppc"></span>
+<span class="hl ppc">#include</span> <span class="hl pps">&quot;libtorrent/assert.hpp&quot;</span><span class="hl ppc"></span>
+
+<span class="hl kwa">namespace</span> libtorrent <span class="hl opt">{</span>
+
+	<span class="hl kwc">ip_filter</span><span class="hl opt">::</span><span class="hl kwd">ip_filter</span><span class="hl opt">() =</span> <span class="hl kwa">default</span><span class="hl opt">;</span>
+	<span class="hl kwc">ip_filter</span><span class="hl opt">::</span><span class="hl kwd">ip_filter</span><span class="hl opt">(</span>ip_filter <span class="hl kwb">const</span><span class="hl opt">&amp;) =</span> <span class="hl kwa">default</span><span class="hl opt">;</span>
+	<span class="hl kwc">ip_filter</span><span class="hl opt">::</span><span class="hl kwd">ip_filter</span><span class="hl opt">(</span>ip_filter<span class="hl opt">&amp;&amp;) =</span> <span class="hl kwa">default</span><span class="hl opt">;</span>
+	ip_filter<span class="hl opt">&amp;</span> <span class="hl kwc">ip_filter</span><span class="hl opt">::</span><span class="hl kwc">operator</span><span class="hl opt">=(</span>ip_filter <span class="hl kwb">const</span><span class="hl opt">&amp;) =</span> <span class="hl kwa">default</span><span class="hl opt">;</span>
+	ip_filter<span class="hl opt">&amp;</span> <span class="hl kwc">ip_filter</span><span class="hl opt">::</span><span class="hl kwc">operator</span><span class="hl opt">=(</span>ip_filter<span class="hl opt">&amp;&amp;) =</span> <span class="hl kwa">default</span><span class="hl opt">;</span>
+	<span class="hl kwc">ip_filter</span><span class="hl opt">::~</span><span class="hl kwd">ip_filter</span><span class="hl opt">() =</span> <span class="hl kwa">default</span><span class="hl opt">;</span>
+
+	<span class="hl kwb">bool</span> <span class="hl kwc">ip_filter</span><span class="hl opt">::</span><span class="hl kwd">empty</span><span class="hl opt">()</span> <span class="hl kwb">const</span> <span class="hl opt">{</span> <span class="hl kwa">return</span> m_filter4<span class="hl opt">.</span><span class="hl kwd">empty</span><span class="hl opt">() &amp;&amp;</span> m_filter6<span class="hl opt">.</span><span class="hl kwd">empty</span><span class="hl opt">(); }</span>
+
+	<span class="hl kwb">void</span> <span class="hl kwc">ip_filter</span><span class="hl opt">::</span><span class="hl kwd">add_rule</span><span class="hl opt">(</span>address <span class="hl kwb">const</span><span class="hl opt">&amp;</span> first<span class="hl opt">,</span> address <span class="hl kwb">const</span><span class="hl opt">&amp;</span> last<span class="hl opt">,</span> <span class="hl kwc">std</span><span class="hl opt">::</span><span class="hl kwb">uint32_t</span> flags<span class="hl opt">)</span>
+	<span class="hl opt">{</span>
+		<span class="hl kwa">if</span> <span class="hl opt">(</span>first<span class="hl opt">.</span><span class="hl kwd">is_v4</span><span class="hl opt">())</span>
+		<span class="hl opt">{</span>
+			<span class="hl kwd">TORRENT_ASSERT</span><span class="hl opt">(</span>last<span class="hl opt">.</span><span class="hl kwd">is_v4</span><span class="hl opt">());</span>
+			m_filter4<span class="hl opt">.</span><span class="hl kwd">add_rule</span><span class="hl opt">(</span>first<span class="hl opt">.</span><span class="hl kwd">to_v4</span><span class="hl opt">().</span><span class="hl kwd">to_bytes</span><span class="hl opt">(),</span> last<span class="hl opt">.</span><span class="hl kwd">to_v4</span><span class="hl opt">().</span><span class="hl kwd">to_bytes</span><span class="hl opt">(),</span> flags<span class="hl opt">);</span>
+		<span class="hl opt">}</span>
+		<span class="hl kwa">else if</span> <span class="hl opt">(</span>first<span class="hl opt">.</span><span class="hl kwd">is_v6</span><span class="hl opt">())</span>
+		<span class="hl opt">{</span>
+			<span class="hl kwd">TORRENT_ASSERT</span><span class="hl opt">(</span>last<span class="hl opt">.</span><span class="hl kwd">is_v6</span><span class="hl opt">());</span>
+			m_filter6<span class="hl opt">.</span><span class="hl kwd">add_rule</span><span class="hl opt">(</span>first<span class="hl opt">.</span><span class="hl kwd">to_v6</span><span class="hl opt">().</span><span class="hl kwd">to_bytes</span><span class="hl opt">(),</span> last<span class="hl opt">.</span><span class="hl kwd">to_v6</span><span class="hl opt">().</span><span class="hl kwd">to_bytes</span><span class="hl opt">(),</span> flags<span class="hl opt">);</span>
+		<span class="hl opt">}</span>
+		<span class="hl kwa">else</span>
+			<span class="hl kwd">TORRENT_ASSERT_FAIL</span><span class="hl opt">();</span>
+	<span class="hl opt">}</span>
+
+	<span class="hl kwc">std</span><span class="hl opt">::</span><span class="hl kwb">uint32_t</span> <span class="hl kwc">ip_filter</span><span class="hl opt">::</span><span class="hl kwd">access</span><span class="hl opt">(</span>address <span class="hl kwb">const</span><span class="hl opt">&amp;</span> addr<span class="hl opt">)</span> <span class="hl kwb">const</span>
+	<span class="hl opt">{</span>
+		<span class="hl kwa">if</span> <span class="hl opt">(</span>addr<span class="hl opt">.</span><span class="hl kwd">is_v4</span><span class="hl opt">())</span>
+			<span class="hl kwa">return</span> m_filter4<span class="hl opt">.</span><span class="hl kwd">access</span><span class="hl opt">(</span>addr<span class="hl opt">.</span><span class="hl kwd">to_v4</span><span class="hl opt">().</span><span class="hl kwd">to_bytes</span><span class="hl opt">());</span>
+		<span class="hl kwd">TORRENT_ASSERT</span><span class="hl opt">(</span>addr<span class="hl opt">.</span><span class="hl kwd">is_v6</span><span class="hl opt">());</span>
+		<span class="hl kwa">return</span> m_filter6<span class="hl opt">.</span><span class="hl kwd">access</span><span class="hl opt">(</span>addr<span class="hl opt">.</span><span class="hl kwd">to_v6</span><span class="hl opt">().</span><span class="hl kwd">to_bytes</span><span class="hl opt">());</span>
+	<span class="hl opt">}</span>
+
+	<span class="hl kwc">ip_filter</span><span class="hl opt">::</span>filter_tuple_t <span class="hl kwc">ip_filter</span><span class="hl opt">::</span><span class="hl kwd">export_filter</span><span class="hl opt">()</span> <span class="hl kwb">const</span>
+	<span class="hl opt">{</span>
+		<span class="hl kwa">return</span> <span class="hl kwc">std</span><span class="hl opt">::</span><span class="hl kwd">make_tuple</span><span class="hl opt">(</span>m_filter4<span class="hl opt">.</span>export_filter<span class="hl opt">&lt;</span>address_v4<span class="hl opt">&gt;()</span>
+			<span class="hl opt">,</span> m_filter6<span class="hl opt">.</span>export_filter<span class="hl opt">&lt;</span>address_v6<span class="hl opt">&gt;());</span>
+	<span class="hl opt">}</span>
+
+	<span class="hl kwc">port_filter</span><span class="hl opt">::</span><span class="hl kwd">port_filter</span><span class="hl opt">() =</span> <span class="hl kwa">default</span><span class="hl opt">;</span>
+	<span class="hl kwc">port_filter</span><span class="hl opt">::</span><span class="hl kwd">port_filter</span><span class="hl opt">(</span>port_filter <span class="hl kwb">const</span><span class="hl opt">&amp;) =</span> <span class="hl kwa">default</span><span class="hl opt">;</span>
+	<span class="hl kwc">port_filter</span><span class="hl opt">::</span><span class="hl kwd">port_filter</span><span class="hl opt">(</span>port_filter<span class="hl opt">&amp;&amp;) =</span> <span class="hl kwa">default</span><span class="hl opt">;</span>
+	port_filter<span class="hl opt">&amp;</span> <span class="hl kwc">port_filter</span><span class="hl opt">::</span><span class="hl kwc">operator</span><span class="hl opt">=(</span>port_filter <span class="hl kwb">const</span><span class="hl opt">&amp;) =</span> <span class="hl kwa">default</span><span class="hl opt">;</span>
+	port_filter<span class="hl opt">&amp;</span> <span class="hl kwc">port_filter</span><span class="hl opt">::</span><span class="hl kwc">operator</span><span class="hl opt">=(</span>port_filter<span class="hl opt">&amp;&amp;) =</span> <span class="hl kwa">default</span><span class="hl opt">;</span>
+	<span class="hl kwc">port_filter</span><span class="hl opt">::~</span><span class="hl kwd">port_filter</span><span class="hl opt">() =</span> <span class="hl kwa">default</span><span class="hl opt">;</span>
+
+	<span class="hl kwb">void</span> <span class="hl kwc">port_filter</span><span class="hl opt">::</span><span class="hl kwd">add_rule</span><span class="hl opt">(</span><span class="hl kwc">std</span><span class="hl opt">::</span><span class="hl kwb">uint16_t</span> first<span class="hl opt">,</span> <span class="hl kwc">std</span><span class="hl opt">::</span><span class="hl kwb">uint16_t</span> last<span class="hl opt">,</span> <span class="hl kwc">std</span><span class="hl opt">::</span><span class="hl kwb">uint32_t</span> flags<span class="hl opt">)</span>
+	<span class="hl opt">{</span>
+		m_filter<span class="hl opt">.</span><span class="hl kwd">add_rule</span><span class="hl opt">(</span>first<span class="hl opt">,</span> last<span class="hl opt">,</span> flags<span class="hl opt">);</span>
+	<span class="hl opt">}</span>
+
+	<span class="hl kwc">std</span><span class="hl opt">::</span><span class="hl kwb">uint32_t</span> <span class="hl kwc">port_filter</span><span class="hl opt">::</span><span class="hl kwd">access</span><span class="hl opt">(</span><span class="hl kwc">std</span><span class="hl opt">::</span><span class="hl kwb">uint16_t</span> port<span class="hl opt">)</span> <span class="hl kwb">const</span>
+	<span class="hl opt">{</span>
+		<span class="hl kwa">return</span> m_filter<span class="hl opt">.</span><span class="hl kwd">access</span><span class="hl opt">(</span>port<span class="hl opt">);</span>
+	<span class="hl opt">}</span>
+
+<span class="hl kwa">namespace</span> aux <span class="hl opt">{</span>
+
+	<span class="hl kwc">template</span> <span class="hl opt">&lt;</span>typename Addr<span class="hl opt">&gt;</span>
+	Addr <span class="hl kwd">zero</span><span class="hl opt">()</span>
+	<span class="hl opt">{</span>
+		Addr zero<span class="hl opt">;</span>
+		<span class="hl kwc">std</span><span class="hl opt">::</span><span class="hl kwd">fill</span><span class="hl opt">(</span>zero<span class="hl opt">.</span><span class="hl kwd">begin</span><span class="hl opt">(),</span> zero<span class="hl opt">.</span><span class="hl kwd">end</span><span class="hl opt">(),</span> <span class="hl kwa">static_cast</span><span class="hl opt">&lt;</span>typename <span class="hl kwc">Addr</span><span class="hl opt">::</span>value_type<span class="hl opt">&gt;(</span><span class="hl num">0</span><span class="hl opt">));</span>
+		<span class="hl kwa">return</span> zero<span class="hl opt">;</span>
+	<span class="hl opt">}</span>
+
+	<span class="hl kwc">template</span> <span class="hl opt">&lt;</span>typename Addr<span class="hl opt">&gt;</span>
+	Addr <span class="hl kwd">plus_one</span><span class="hl opt">(</span>Addr <span class="hl kwb">const</span><span class="hl opt">&amp;</span> a<span class="hl opt">)</span>
+	<span class="hl opt">{</span>
+		Addr <span class="hl kwd">tmp</span><span class="hl opt">(</span>a<span class="hl opt">);</span>
+		<span class="hl kwa">for</span> <span class="hl opt">(</span><span class="hl kwb">int</span> i <span class="hl opt">=</span> <span class="hl kwb">int</span><span class="hl opt">(</span>tmp<span class="hl opt">.</span><span class="hl kwd">size</span><span class="hl opt">()) -</span> <span class="hl num">1</span><span class="hl opt">;</span> i <span class="hl opt">&gt;=</span> <span class="hl num">0</span><span class="hl opt">; --</span>i<span class="hl opt">)</span>
+		<span class="hl opt">{</span>
+			<span class="hl kwc">auto</span><span class="hl opt">&amp;</span> t <span class="hl opt">=</span> tmp<span class="hl opt">[</span><span class="hl kwc">std</span><span class="hl opt">::</span><span class="hl kwb">size_t</span><span class="hl opt">(</span>i<span class="hl opt">)];</span>
+			<span class="hl kwa">if</span> <span class="hl opt">(</span>t <span class="hl opt">&lt; (</span><span class="hl kwc">std</span><span class="hl opt">::</span>numeric_limits<span class="hl opt">&lt;</span>typename <span class="hl kwc">Addr</span><span class="hl opt">::</span>value_type<span class="hl opt">&gt;::</span>max<span class="hl opt">)())</span>
+			<span class="hl opt">{</span>
+				t <span class="hl opt">+=</span> <span class="hl num">1</span><span class="hl opt">;</span>
+				<span class="hl kwa">break</span><span class="hl opt">;</span>
+			<span class="hl opt">}</span>
+			t <span class="hl opt">=</span> <span class="hl num">0</span><span class="hl opt">;</span>
+		<span class="hl opt">}</span>
+		<span class="hl kwa">return</span> tmp<span class="hl opt">;</span>
+	<span class="hl opt">}</span>
+
+	<span class="hl kwc">template</span> <span class="hl opt">&lt;</span>typename Addr<span class="hl opt">&gt;</span>
+	Addr <span class="hl kwd">minus_one</span><span class="hl opt">(</span>Addr <span class="hl kwb">const</span><span class="hl opt">&amp;</span> a<span class="hl opt">)</span>
+	<span class="hl opt">{</span>
+		Addr <span class="hl kwd">tmp</span><span class="hl opt">(</span>a<span class="hl opt">);</span>
+		<span class="hl kwa">for</span> <span class="hl opt">(</span><span class="hl kwb">int</span> i <span class="hl opt">=</span> <span class="hl kwb">int</span><span class="hl opt">(</span>tmp<span class="hl opt">.</span><span class="hl kwd">size</span><span class="hl opt">()) -</span> <span class="hl num">1</span><span class="hl opt">;</span> i <span class="hl opt">&gt;=</span> <span class="hl num">0</span><span class="hl opt">; --</span>i<span class="hl opt">)</span>
+		<span class="hl opt">{</span>
+			<span class="hl kwc">auto</span><span class="hl opt">&amp;</span> t <span class="hl opt">=</span> tmp<span class="hl opt">[</span><span class="hl kwc">std</span><span class="hl opt">::</span><span class="hl kwb">size_t</span><span class="hl opt">(</span>i<span class="hl opt">)];</span>
+			<span class="hl kwa">if</span> <span class="hl opt">(</span>t <span class="hl opt">&gt;</span> <span class="hl num">0</span><span class="hl opt">)</span>
+			<span class="hl opt">{</span>
+				t <span class="hl opt">-=</span> <span class="hl num">1</span><span class="hl opt">;</span>
+				<span class="hl kwa">break</span><span class="hl opt">;</span>
+			<span class="hl opt">}</span>
+			t <span class="hl opt">= (</span><span class="hl kwc">std</span><span class="hl opt">::</span>numeric_limits<span class="hl opt">&lt;</span>typename <span class="hl kwc">Addr</span><span class="hl opt">::</span>value_type<span class="hl opt">&gt;::</span>max<span class="hl opt">)();</span>
+		<span class="hl opt">}</span>
+		<span class="hl kwa">return</span> tmp<span class="hl opt">;</span>
+	<span class="hl opt">}</span>
+
+	<span class="hl kwc">template</span> <span class="hl opt">&lt;</span>typename Addr<span class="hl opt">&gt;</span>
+	Addr <span class="hl kwd">max_addr</span><span class="hl opt">()</span>
+	<span class="hl opt">{</span>
+		Addr tmp<span class="hl opt">;</span>
+		<span class="hl kwc">std</span><span class="hl opt">::</span><span class="hl kwd">fill</span><span class="hl opt">(</span>tmp<span class="hl opt">.</span><span class="hl kwd">begin</span><span class="hl opt">(),</span> tmp<span class="hl opt">.</span><span class="hl kwd">end</span><span class="hl opt">()</span>
+			<span class="hl opt">, (</span><span class="hl kwc">std</span><span class="hl opt">::</span>numeric_limits<span class="hl opt">&lt;</span>typename <span class="hl kwc">Addr</span><span class="hl opt">::</span>value_type<span class="hl opt">&gt;::</span>max<span class="hl opt">)());</span>
+		<span class="hl kwa">return</span> tmp<span class="hl opt">;</span>
+	<span class="hl opt">}</span>
+
+<span class="hl ppc">#ifdef _MSC_VER</span>
+<span class="hl ppc">#define EXPORT_INST TORRENT_EXTRA_EXPORT</span>
+<span class="hl ppc">#else</span>
+<span class="hl ppc">#define EXPORT_INST</span>
+<span class="hl ppc">#endif</span>
+
+	<span class="hl kwc">template</span> EXPORT_INST <span class="hl kwc">address_v4</span><span class="hl opt">::</span>bytes_type minus_one<span class="hl opt">&lt;</span><span class="hl kwc">address_v4</span><span class="hl opt">::</span>bytes_type<span class="hl opt">&gt;(</span><span class="hl kwc">address_v4</span><span class="hl opt">::</span>bytes_type <span class="hl kwb">const</span><span class="hl opt">&amp;);</span>
+	<span class="hl kwc">template</span> EXPORT_INST <span class="hl kwc">address_v6</span><span class="hl opt">::</span>bytes_type minus_one<span class="hl opt">&lt;</span><span class="hl kwc">address_v6</span><span class="hl opt">::</span>bytes_type<span class="hl opt">&gt;(</span><span class="hl kwc">address_v6</span><span class="hl opt">::</span>bytes_type <span class="hl kwb">const</span><span class="hl opt">&amp;);</span>
+	<span class="hl kwc">template</span> EXPORT_INST <span class="hl kwc">address_v4</span><span class="hl opt">::</span>bytes_type plus_one<span class="hl opt">&lt;</span><span class="hl kwc">address_v4</span><span class="hl opt">::</span>bytes_type<span class="hl opt">&gt;(</span><span class="hl kwc">address_v4</span><span class="hl opt">::</span>bytes_type <span class="hl kwb">const</span><span class="hl opt">&amp;);</span>
+	<span class="hl kwc">template</span> EXPORT_INST <span class="hl kwc">address_v6</span><span class="hl opt">::</span>bytes_type plus_one<span class="hl opt">&lt;</span><span class="hl kwc">address_v6</span><span class="hl opt">::</span>bytes_type<span class="hl opt">&gt;(</span><span class="hl kwc">address_v6</span><span class="hl opt">::</span>bytes_type <span class="hl kwb">const</span><span class="hl opt">&amp;);</span>
+	<span class="hl kwc">template</span> EXPORT_INST <span class="hl kwc">address_v4</span><span class="hl opt">::</span>bytes_type zero<span class="hl opt">&lt;</span><span class="hl kwc">address_v4</span><span class="hl opt">::</span>bytes_type<span class="hl opt">&gt;();</span>
+	<span class="hl kwc">template</span> EXPORT_INST <span class="hl kwc">address_v6</span><span class="hl opt">::</span>bytes_type zero<span class="hl opt">&lt;</span><span class="hl kwc">address_v6</span><span class="hl opt">::</span>bytes_type<span class="hl opt">&gt;();</span>
+	<span class="hl kwc">template</span> EXPORT_INST <span class="hl kwc">address_v4</span><span class="hl opt">::</span>bytes_type max_addr<span class="hl opt">&lt;</span><span class="hl kwc">address_v4</span><span class="hl opt">::</span>bytes_type<span class="hl opt">&gt;();</span>
+	<span class="hl kwc">template</span> EXPORT_INST <span class="hl kwc">address_v6</span><span class="hl opt">::</span>bytes_type max_addr<span class="hl opt">&lt;</span><span class="hl kwc">address_v6</span><span class="hl opt">::</span>bytes_type<span class="hl opt">&gt;();</span>
+
+	<span class="hl kwc">template</span> <span class="hl opt">&lt;</span>typename Addr<span class="hl opt">&gt;</span>
+	filter_impl<span class="hl opt">&lt;</span>Addr<span class="hl opt">&gt;::</span><span class="hl kwd">filter_impl</span><span class="hl opt">()</span>
+	<span class="hl opt">{</span>
+		<span class="hl slc">// make the entire ip-range non-blocked</span>
+		m_access_list<span class="hl opt">.</span><span class="hl kwd">insert</span><span class="hl opt">(</span><span class="hl kwd">range</span><span class="hl opt">(</span>zero<span class="hl opt">&lt;</span>Addr<span class="hl opt">&gt;(),</span> <span class="hl num">0</span><span class="hl opt">));</span>
+	<span class="hl opt">}</span>
+
+	<span class="hl kwc">template</span> <span class="hl opt">&lt;</span>typename Addr<span class="hl opt">&gt;</span>
+	<span class="hl kwb">bool</span> filter_impl<span class="hl opt">&lt;</span>Addr<span class="hl opt">&gt;::</span><span class="hl kwd">empty</span><span class="hl opt">()</span> <span class="hl kwb">const</span>
+	<span class="hl opt">{</span>
+		<span class="hl kwa">return</span> m_access_list<span class="hl opt">.</span><span class="hl kwd">empty</span><span class="hl opt">()</span>
+			<span class="hl opt">|| (</span>m_access_list<span class="hl opt">.</span><span class="hl kwd">size</span><span class="hl opt">() ==</span> <span class="hl num">1</span> <span class="hl opt">&amp;&amp; *</span>m_access_list<span class="hl opt">.</span><span class="hl kwd">begin</span><span class="hl opt">() ==</span> <span class="hl kwd">range</span><span class="hl opt">(</span>zero<span class="hl opt">&lt;</span>Addr<span class="hl opt">&gt;(),</span> <span class="hl num">0</span><span class="hl opt">));</span>
+	<span class="hl opt">}</span>
+
+	<span class="hl kwc">template</span> <span class="hl opt">&lt;</span>typename Addr<span class="hl opt">&gt;</span>
+	<span class="hl kwb">void</span> filter_impl<span class="hl opt">&lt;</span>Addr<span class="hl opt">&gt;::</span><span class="hl kwd">add_rule</span><span class="hl opt">(</span>Addr first<span class="hl opt">,</span> Addr last<span class="hl opt">,</span> <span class="hl kwc">std</span><span class="hl opt">::</span><span class="hl kwb">uint32_t const</span> flags<span class="hl opt">)</span>
+	<span class="hl opt">{</span>
+		<span class="hl kwd">TORRENT_ASSERT</span><span class="hl opt">(!</span>m_access_list<span class="hl opt">.</span><span class="hl kwd">empty</span><span class="hl opt">());</span>
+		<span class="hl kwd">TORRENT_ASSERT</span><span class="hl opt">(</span>first <span class="hl opt">&lt;</span> last <span class="hl opt">||</span> first <span class="hl opt">==</span> last<span class="hl opt">);</span>
+
+		<span class="hl kwc">auto</span> i <span class="hl opt">=</span> m_access_list<span class="hl opt">.</span><span class="hl kwd">upper_bound</span><span class="hl opt">(</span>first<span class="hl opt">);</span>
+		<span class="hl kwc">auto</span> j <span class="hl opt">=</span> m_access_list<span class="hl opt">.</span><span class="hl kwd">upper_bound</span><span class="hl opt">(</span>last<span class="hl opt">);</span>
+
+		<span class="hl kwa">if</span> <span class="hl opt">(</span>i <span class="hl opt">!=</span> m_access_list<span class="hl opt">.</span><span class="hl kwd">begin</span><span class="hl opt">()) --</span>i<span class="hl opt">;</span>
+
+		<span class="hl kwd">TORRENT_ASSERT</span><span class="hl opt">(</span>j <span class="hl opt">!=</span> m_access_list<span class="hl opt">.</span><span class="hl kwd">begin</span><span class="hl opt">());</span>
+		<span class="hl kwd">TORRENT_ASSERT</span><span class="hl opt">(</span>j <span class="hl opt">!=</span> i<span class="hl opt">);</span>
+
+		<span class="hl kwc">std</span><span class="hl opt">::</span><span class="hl kwb">uint32_t</span> first_access <span class="hl opt">=</span> i<span class="hl opt">-&gt;</span>access<span class="hl opt">;</span>
+		<span class="hl kwc">std</span><span class="hl opt">::</span><span class="hl kwb">uint32_t</span> last_access <span class="hl opt">=</span> <span class="hl kwc">std</span><span class="hl opt">::</span><span class="hl kwd">prev</span><span class="hl opt">(</span>j<span class="hl opt">)-&gt;</span>access<span class="hl opt">;</span>
+
+		<span class="hl kwa">if</span> <span class="hl opt">(</span>i<span class="hl opt">-&gt;</span>start <span class="hl opt">!=</span> first <span class="hl opt">&amp;&amp;</span> first_access <span class="hl opt">!=</span> flags<span class="hl opt">)</span>
+		<span class="hl opt">{</span>
+			i <span class="hl opt">=</span> m_access_list<span class="hl opt">.</span><span class="hl kwd">insert</span><span class="hl opt">(</span>i<span class="hl opt">,</span> <span class="hl kwd">range</span><span class="hl opt">(</span>first<span class="hl opt">,</span> flags<span class="hl opt">));</span>
+		<span class="hl opt">}</span>
+		<span class="hl kwa">else if</span> <span class="hl opt">(</span>i <span class="hl opt">!=</span> m_access_list<span class="hl opt">.</span><span class="hl kwd">begin</span><span class="hl opt">() &amp;&amp;</span> <span class="hl kwc">std</span><span class="hl opt">::</span><span class="hl kwd">prev</span><span class="hl opt">(</span>i<span class="hl opt">)-&gt;</span>access <span class="hl opt">==</span> flags<span class="hl opt">)</span>
+		<span class="hl opt">{</span>
+			<span class="hl opt">--</span>i<span class="hl opt">;</span>
+			first_access <span class="hl opt">=</span> i<span class="hl opt">-&gt;</span>access<span class="hl opt">;</span>
+		<span class="hl opt">}</span>
+		<span class="hl kwd">TORRENT_ASSERT</span><span class="hl opt">(!</span>m_access_list<span class="hl opt">.</span><span class="hl kwd">empty</span><span class="hl opt">());</span>
+		<span class="hl kwd">TORRENT_ASSERT</span><span class="hl opt">(</span>i <span class="hl opt">!=</span> m_access_list<span class="hl opt">.</span><span class="hl kwd">end</span><span class="hl opt">());</span>
+
+		<span class="hl kwa">if</span> <span class="hl opt">(</span>i <span class="hl opt">!=</span> j<span class="hl opt">)</span> m_access_list<span class="hl opt">.</span><span class="hl kwd">erase</span><span class="hl opt">(</span><span class="hl kwc">std</span><span class="hl opt">::</span><span class="hl kwd">next</span><span class="hl opt">(</span>i<span class="hl opt">),</span> j<span class="hl opt">);</span>
+		<span class="hl kwa">if</span> <span class="hl opt">(</span>i<span class="hl opt">-&gt;</span>start <span class="hl opt">==</span> first<span class="hl opt">)</span>
+		<span class="hl opt">{</span>
+			<span class="hl slc">// This is an optimization over erasing and inserting a new element</span>
+			<span class="hl slc">// here.</span>
+			<span class="hl slc">// this const-cast is OK because we know that the new</span>
+			<span class="hl slc">// start address will keep the set correctly ordered</span>
+			<span class="hl kwa">const_cast</span><span class="hl opt">&lt;</span>Addr<span class="hl opt">&amp;&gt;(</span>i<span class="hl opt">-&gt;</span>start<span class="hl opt">) =</span> first<span class="hl opt">;</span>
+			<span class="hl kwa">const_cast</span><span class="hl opt">&lt;</span><span class="hl kwc">std</span><span class="hl opt">::</span><span class="hl kwb">uint32_t</span><span class="hl opt">&amp;&gt;(</span>i<span class="hl opt">-&gt;</span>access<span class="hl opt">) =</span> flags<span class="hl opt">;</span>
+		<span class="hl opt">}</span>
+		<span class="hl kwa">else if</span> <span class="hl opt">(</span>first_access <span class="hl opt">!=</span> flags<span class="hl opt">)</span>
+		<span class="hl opt">{</span>
+			m_access_list<span class="hl opt">.</span><span class="hl kwd">insert</span><span class="hl opt">(</span>i<span class="hl opt">,</span> <span class="hl kwd">range</span><span class="hl opt">(</span>first<span class="hl opt">,</span> flags<span class="hl opt">));</span>
+		<span class="hl opt">}</span>
+
+		<span class="hl kwa">if</span> <span class="hl opt">((</span>j <span class="hl opt">!=</span> m_access_list<span class="hl opt">.</span><span class="hl kwd">end</span><span class="hl opt">()</span>
+				<span class="hl opt">&amp;&amp;</span> <span class="hl kwd">minus_one</span><span class="hl opt">(</span>j<span class="hl opt">-&gt;</span>start<span class="hl opt">) !=</span> last<span class="hl opt">)</span>
+			<span class="hl opt">|| (</span>j <span class="hl opt">==</span> m_access_list<span class="hl opt">.</span><span class="hl kwd">end</span><span class="hl opt">()</span>
+				<span class="hl opt">&amp;&amp;</span> last <span class="hl opt">!=</span> max_addr<span class="hl opt">&lt;</span>Addr<span class="hl opt">&gt;()))</span>
+		<span class="hl opt">{</span>
+			<span class="hl kwd">TORRENT_ASSERT</span><span class="hl opt">(</span>j <span class="hl opt">==</span> m_access_list<span class="hl opt">.</span><span class="hl kwd">end</span><span class="hl opt">() ||</span> last <span class="hl opt">&lt;</span> <span class="hl kwd">minus_one</span><span class="hl opt">(</span>j<span class="hl opt">-&gt;</span>start<span class="hl opt">));</span>
+			<span class="hl kwa">if</span> <span class="hl opt">(</span>last_access <span class="hl opt">!=</span> flags<span class="hl opt">)</span>
+				j <span class="hl opt">=</span> m_access_list<span class="hl opt">.</span><span class="hl kwd">insert</span><span class="hl opt">(</span>j<span class="hl opt">,</span> <span class="hl kwd">range</span><span class="hl opt">(</span><span class="hl kwd">plus_one</span><span class="hl opt">(</span>last<span class="hl opt">),</span> last_access<span class="hl opt">));</span>
+		<span class="hl opt">}</span>
+
+		<span class="hl kwa">if</span> <span class="hl opt">(</span>j <span class="hl opt">!=</span> m_access_list<span class="hl opt">.</span><span class="hl kwd">end</span><span class="hl opt">() &amp;&amp;</span> j<span class="hl opt">-&gt;</span>access <span class="hl opt">==</span> flags<span class="hl opt">)</span> m_access_list<span class="hl opt">.</span><span class="hl kwd">erase</span><span class="hl opt">(</span>j<span class="hl opt">);</span>
+		<span class="hl kwd">TORRENT_ASSERT</span><span class="hl opt">(!</span>m_access_list<span class="hl opt">.</span><span class="hl kwd">empty</span><span class="hl opt">());</span>
+	<span class="hl opt">}</span>
+
+	<span class="hl kwc">template</span> <span class="hl opt">&lt;</span>typename Addr<span class="hl opt">&gt;</span>
+	<span class="hl kwc">std</span><span class="hl opt">::</span><span class="hl kwb">uint32_t</span> filter_impl<span class="hl opt">&lt;</span>Addr<span class="hl opt">&gt;::</span><span class="hl kwd">access</span><span class="hl opt">(</span>Addr <span class="hl kwb">const</span><span class="hl opt">&amp;</span> addr<span class="hl opt">)</span> <span class="hl kwb">const</span>
+	<span class="hl opt">{</span>
+		<span class="hl kwd">TORRENT_ASSERT</span><span class="hl opt">(!</span>m_access_list<span class="hl opt">.</span><span class="hl kwd">empty</span><span class="hl opt">());</span>
+		<span class="hl kwc">auto</span> i <span class="hl opt">=</span> m_access_list<span class="hl opt">.</span><span class="hl kwd">upper_bound</span><span class="hl opt">(</span>addr<span class="hl opt">);</span>
+		<span class="hl kwa">if</span> <span class="hl opt">(</span>i <span class="hl opt">!=</span> m_access_list<span class="hl opt">.</span><span class="hl kwd">begin</span><span class="hl opt">()) --</span>i<span class="hl opt">;</span>
+		<span class="hl kwd">TORRENT_ASSERT</span><span class="hl opt">(</span>i <span class="hl opt">!=</span> m_access_list<span class="hl opt">.</span><span class="hl kwd">end</span><span class="hl opt">());</span>
+		<span class="hl kwd">TORRENT_ASSERT</span><span class="hl opt">(</span>i<span class="hl opt">-&gt;</span>start <span class="hl opt">&lt;=</span> addr <span class="hl opt">&amp;&amp; (</span><span class="hl kwc">std</span><span class="hl opt">::</span><span class="hl kwd">next</span><span class="hl opt">(</span>i<span class="hl opt">) ==</span> m_access_list<span class="hl opt">.</span><span class="hl kwd">end</span><span class="hl opt">()</span>
+			<span class="hl opt">||</span> addr <span class="hl opt">&lt;</span> <span class="hl kwc">std</span><span class="hl opt">::</span><span class="hl kwd">next</span><span class="hl opt">(</span>i<span class="hl opt">)-&gt;</span>start<span class="hl opt">));</span>
+		<span class="hl kwa">return</span> i<span class="hl opt">-&gt;</span>access<span class="hl opt">;</span>
+	<span class="hl opt">}</span>
+
+	<span class="hl kwc">template</span> <span class="hl opt">&lt;</span>typename Addr<span class="hl opt">&gt;</span>
+	<span class="hl kwc">template</span> <span class="hl opt">&lt;</span>typename ExternalAddressType<span class="hl opt">&gt;</span>
+	<span class="hl kwc">std</span><span class="hl opt">::</span>vector<span class="hl opt">&lt;</span>ip_range<span class="hl opt">&lt;</span>ExternalAddressType<span class="hl opt">&gt;&gt;</span> filter_impl<span class="hl opt">&lt;</span>Addr<span class="hl opt">&gt;::</span><span class="hl kwd">export_filter</span><span class="hl opt">()</span> <span class="hl kwb">const</span>
+	<span class="hl opt">{</span>
+		<span class="hl kwc">std</span><span class="hl opt">::</span>vector<span class="hl opt">&lt;</span>ip_range<span class="hl opt">&lt;</span>ExternalAddressType<span class="hl opt">&gt;&gt;</span> ret<span class="hl opt">;</span>
+		ret<span class="hl opt">.</span><span class="hl kwd">reserve</span><span class="hl opt">(</span>m_access_list<span class="hl opt">.</span><span class="hl kwd">size</span><span class="hl opt">());</span>
+
+		<span class="hl kwa">for</span> <span class="hl opt">(</span><span class="hl kwc">auto</span> i <span class="hl opt">=</span> m_access_list<span class="hl opt">.</span><span class="hl kwd">begin</span><span class="hl opt">()</span>
+			<span class="hl opt">,</span> <span class="hl kwd">end</span><span class="hl opt">(</span>m_access_list<span class="hl opt">.</span><span class="hl kwd">end</span><span class="hl opt">());</span> i <span class="hl opt">!=</span> end<span class="hl opt">;)</span>
+		<span class="hl opt">{</span>
+			ip_range<span class="hl opt">&lt;</span>ExternalAddressType<span class="hl opt">&gt;</span> r<span class="hl opt">;</span>
+			r<span class="hl opt">.</span>first <span class="hl opt">=</span> <span class="hl kwd">ExternalAddressType</span><span class="hl opt">(</span>i<span class="hl opt">-&gt;</span>start<span class="hl opt">);</span>
+			r<span class="hl opt">.</span>flags <span class="hl opt">=</span> i<span class="hl opt">-&gt;</span>access<span class="hl opt">;</span>
+
+			<span class="hl opt">++</span>i<span class="hl opt">;</span>
+			<span class="hl kwa">if</span> <span class="hl opt">(</span>i <span class="hl opt">==</span> end<span class="hl opt">)</span>
+				r<span class="hl opt">.</span>last <span class="hl opt">=</span> <span class="hl kwd">ExternalAddressType</span><span class="hl opt">(</span>max_addr<span class="hl opt">&lt;</span>Addr<span class="hl opt">&gt;());</span>
+			<span class="hl kwa">else</span>
+				r<span class="hl opt">.</span>last <span class="hl opt">=</span> <span class="hl kwd">ExternalAddressType</span><span class="hl opt">(</span><span class="hl kwd">minus_one</span><span class="hl opt">(</span>i<span class="hl opt">-&gt;</span>start<span class="hl opt">));</span>
+
+			ret<span class="hl opt">.</span><span class="hl kwd">push_back</span><span class="hl opt">(</span>r<span class="hl opt">);</span>
+		<span class="hl opt">}</span>
+		<span class="hl kwa">return</span> ret<span class="hl opt">;</span>
+	<span class="hl opt">}</span>
+
+	<span class="hl kwc">template class</span> EXPORT_INST filter_impl<span class="hl opt">&lt;</span><span class="hl kwc">address_v4</span><span class="hl opt">::</span>bytes_type<span class="hl opt">&gt;;</span>
+	<span class="hl kwc">template class</span> EXPORT_INST filter_impl<span class="hl opt">&lt;</span><span class="hl kwc">address_v6</span><span class="hl opt">::</span>bytes_type<span class="hl opt">&gt;;</span>
+	<span class="hl kwc">template class</span> EXPORT_INST filter_impl<span class="hl opt">&lt;</span><span class="hl kwc">std</span><span class="hl opt">::</span><span class="hl kwb">uint16_t</span><span class="hl opt">&gt;;</span>
+
+	<span class="hl kwc">template</span> EXPORT_INST <span class="hl kwc">std</span><span class="hl opt">::</span>vector<span class="hl opt">&lt;</span>ip_range<span class="hl opt">&lt;</span>address_v4<span class="hl opt">&gt;&gt;</span> filter_impl<span class="hl opt">&lt;</span><span class="hl kwc">address_v4</span><span class="hl opt">::</span>bytes_type<span class="hl opt">&gt;::</span><span class="hl kwd">export_filter</span><span class="hl opt">()</span> <span class="hl kwb">const</span><span class="hl opt">;</span>
+	<span class="hl kwc">template</span> EXPORT_INST <span class="hl kwc">std</span><span class="hl opt">::</span>vector<span class="hl opt">&lt;</span>ip_range<span class="hl opt">&lt;</span>address_v6<span class="hl opt">&gt;&gt;</span> filter_impl<span class="hl opt">&lt;</span><span class="hl kwc">address_v6</span><span class="hl opt">::</span>bytes_type<span class="hl opt">&gt;::</span><span class="hl kwd">export_filter</span><span class="hl opt">()</span> <span class="hl kwb">const</span><span class="hl opt">;</span>
+	<span class="hl kwc">template</span> EXPORT_INST <span class="hl kwc">std</span><span class="hl opt">::</span>vector<span class="hl opt">&lt;</span>ip_range<span class="hl opt">&lt;</span><span class="hl kwc">std</span><span class="hl opt">::</span><span class="hl kwb">uint16_t</span><span class="hl opt">&gt;&gt;</span> filter_impl<span class="hl opt">&lt;</span><span class="hl kwc">std</span><span class="hl opt">::</span><span class="hl kwb">uint16_t</span><span class="hl opt">&gt;::</span><span class="hl kwd">export_filter</span><span class="hl opt">()</span> <span class="hl kwb">const</span><span class="hl opt">;</span>
+
+<span class="hl ppc">#undef EXPORT_INST</span>
+
+<span class="hl opt">}</span> <span class="hl slc">// namespace aux</span>
+<span class="hl opt">}</span>
+</pre>
+</body>
+</html>
+<!--HTML generated by highlight 3.41, http://www.andre-simon.de/-->

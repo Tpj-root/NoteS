@@ -1,0 +1,53 @@
+Content-type: text/html; charset=UTF-8
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><HEAD><TITLE>Man page of array_bytes</TITLE>
+</HEAD><BODY>
+<H1>array_bytes</H1>
+Section: C Library Functions (3)<BR><A HREF="#index">Index</A>
+<A HREF="/cgi-bin/man/man2html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+array_bytes - get number of allocated members in array
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNTAX</H2>
+
+<B>#include &lt;<A HREF="file:///usr/include/libowfat/array.h">libowfat/array.h</A>&gt;</B>
+
+<P>
+int64 <B>array_bytes</B>(array* <I>x</I>);
+<P>
+<BR>&nbsp;&nbsp;array&nbsp;<I>x</I>;
+<BR>&nbsp;&nbsp;int64&nbsp;bytes&nbsp;=&nbsp;array_bytes(&amp;<I>x</I>);
+<P>
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+array_bytes returns the number of initialized bytes in <I>x</I>, without
+regard to <I>t</I>.
+<P>
+If <I>x</I> is unallocated, array_length and array_bytes return 0.
+<P>
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF="/cgi-bin/man/man2html?3+array_allocate">array_allocate</A>(3), <A HREF="/cgi-bin/man/man2html?3+array_get">array_get</A>(3), <A HREF="/cgi-bin/man/man2html?3+array_fail">array_fail</A>(3), <A HREF="/cgi-bin/man/man2html?3+array_length">array_length</A>(3)
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNTAX</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 08:55:18 GMT, January 08, 2025
+</BODY>
+</HTML>

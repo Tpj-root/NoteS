@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>array_allocate.c</title>
+<link rel="stylesheet" type="text/css" href="highlight.css">
+</head>
+<body class="hl">
+<pre class="hl"><span class="hl ppc">#include</span> <span class="hl pps">&quot;likely.h&quot;</span><span class="hl ppc"></span>
+<span class="hl ppc">#include &lt;sys/types.h&gt;</span>
+<span class="hl ppc">#include &lt;stdlib.h&gt;</span>
+<span class="hl ppc">#include</span> <span class="hl pps">&quot;safemult.h&quot;</span><span class="hl ppc"></span>
+<span class="hl ppc">#include</span> <span class="hl pps">&quot;array.h&quot;</span><span class="hl ppc"></span>
+<span class="hl ppc">#include</span> <span class="hl pps">&quot;byte.h&quot;</span><span class="hl ppc"></span>
+
+<span class="hl ppc">#if 0</span>
+      <span class="hl kwb">static</span> array x<span class="hl opt">;</span>
+      t <span class="hl opt">*</span>p<span class="hl opt">;</span>
+      int64 pos<span class="hl opt">;</span>
+
+      p <span class="hl opt">=</span> <span class="hl kwd">array_allocate</span><span class="hl opt">(&amp;</span>x<span class="hl opt">,</span><span class="hl kwa">sizeof</span><span class="hl opt">(</span>t<span class="hl opt">),</span>pos<span class="hl opt">);</span>
+
+   array_allocate makes sure that enough bytes are allocated in x <span class="hl kwa">for</span> at
+   least pos<span class="hl opt">+</span><span class="hl num">1</span> objects of type t<span class="hl opt">. (</span>The size of t must be positive<span class="hl opt">;</span>
+   otherwise the effects are undefined<span class="hl opt">.)</span> If <span class="hl kwa">not</span> enough bytes are
+   <span class="hl kwd">allocated</span> <span class="hl opt">(</span><span class="hl kwa">or</span> x is unallocated<span class="hl opt">),</span> array_allocate allocates more bytes<span class="hl opt">,</span>
+   moving the dynamically allocated region <span class="hl kwa">if</span> necessary<span class="hl opt">.</span> array_allocate
+   often allocates somewhat more bytes than necessary<span class="hl opt">,</span> to save time
+   later<span class="hl opt">.</span>
+
+   array_allocate then makes sure that the number of bytes initialized
+   covers at least those pos<span class="hl opt">+</span><span class="hl num">1</span> objects<span class="hl opt">.</span> If <span class="hl kwa">not</span> enough bytes are
+   initialized<span class="hl opt">,</span> array_allocate initializes more <span class="hl kwd">bytes</span> <span class="hl opt">(</span>setting them to
+   <span class="hl num">0</span><span class="hl opt">),</span> up to exactly the end of the pos<span class="hl opt">+</span><span class="hl num">1</span>st object<span class="hl opt">.</span>
+
+   array_allocate then returns a pointer to the pos<span class="hl opt">+</span><span class="hl num">1</span>st object<span class="hl opt">;</span> i<span class="hl opt">.</span>e<span class="hl opt">.,</span>
+   object number pos<span class="hl opt">,</span> with objects numbered starting at <span class="hl num">0</span><span class="hl opt">.</span> This pointer
+   can be used to change <span class="hl kwa">or</span> inspect the object<span class="hl opt">.</span> The pointer can <span class="hl kwa">continue</span>
+   to be used through subsequent calls to array_get<span class="hl opt">,</span> array_start<span class="hl opt">,</span>
+   array_length<span class="hl opt">,</span> <span class="hl kwa">and</span> array_bytes<span class="hl opt">,</span> but it must <span class="hl kwa">not</span> be used after any
+   other operations on <span class="hl kwa">this</span> array<span class="hl opt">.</span>
+
+   If something goes wrong<span class="hl opt">,</span> array_allocate returns <span class="hl num">0</span><span class="hl opt">,</span> setting errno
+   appropriately<span class="hl opt">,</span> without touching x<span class="hl opt">.</span> In particular<span class="hl opt">,</span> array_allocate
+   returns <span class="hl num">0</span> <span class="hl kwa">if</span>
+
+     <span class="hl opt">*</span> x has failed<span class="hl opt">,</span> <span class="hl kwa">or</span>
+     <span class="hl opt">*</span> pos is negative<span class="hl opt">,</span> <span class="hl kwa">or</span>
+     <span class="hl opt">*</span> <span class="hl kwa">not</span> enough memory is available<span class="hl opt">.</span>
+
+   array_allocate does <span class="hl kwa">not</span> change x to have failed<span class="hl opt">;</span> <span class="hl kwa">if</span> you want to <span class="hl kwa">do</span>
+   that<span class="hl opt">,</span> use array_fail<span class="hl opt">.</span>
+<span class="hl ppc">#endif</span>
+
+<span class="hl kwb">void</span><span class="hl opt">*</span> <span class="hl kwd">array_allocate</span><span class="hl opt">(</span>array<span class="hl opt">*</span> x<span class="hl opt">,</span>uint64 membersize<span class="hl opt">,</span>int64 pos<span class="hl opt">) {</span>
+  uint64 wanted<span class="hl opt">;</span>
+  <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwd">__unlikely</span><span class="hl opt">(</span>x<span class="hl opt">-&gt;</span>allocated<span class="hl opt">&lt;</span><span class="hl num">0</span><span class="hl opt">))</span> <span class="hl kwa">return</span> <span class="hl num">0</span><span class="hl opt">;</span> <span class="hl com">/* array is failed */</span>
+  <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwd">__unlikely</span><span class="hl opt">(</span>pos<span class="hl opt">+</span><span class="hl num">1</span><span class="hl opt">&lt;</span><span class="hl num">1</span><span class="hl opt">))</span> <span class="hl kwa">return</span> <span class="hl num">0</span><span class="hl opt">;</span>
+  <span class="hl com">/* second case of overflow: pos*membersize too large */</span>
+  <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwd">__unlikely</span><span class="hl opt">(!</span><span class="hl kwd">umult64</span><span class="hl opt">(</span>membersize<span class="hl opt">,</span>pos<span class="hl opt">+</span><span class="hl num">1</span><span class="hl opt">,&amp;</span>wanted<span class="hl opt">)))</span> <span class="hl kwa">return</span> <span class="hl num">0</span><span class="hl opt">;</span>
+
+  <span class="hl kwa">if</span> <span class="hl opt">(</span>wanted <span class="hl opt">&gt; (</span>uint64<span class="hl opt">)</span>x<span class="hl opt">-&gt;</span>initialized<span class="hl opt">) {</span>
+    <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwd">__unlikely</span><span class="hl opt">(</span>wanted <span class="hl opt">&gt;= (</span>uint64<span class="hl opt">)</span>x<span class="hl opt">-&gt;</span>allocated<span class="hl opt">)) {</span>
+      <span class="hl com">/* round up a little */</span>
+      <span class="hl kwa">if</span> <span class="hl opt">(</span>membersize<span class="hl opt">&lt;</span><span class="hl num">8</span><span class="hl opt">)</span>
+	wanted<span class="hl opt">=(</span>wanted<span class="hl opt">+</span><span class="hl num">127</span><span class="hl opt">)&amp;(-</span><span class="hl num">128ll</span><span class="hl opt">);</span>	<span class="hl com">/* round up to multiple of 128 */</span>
+      <span class="hl kwa">else</span>
+	wanted<span class="hl opt">=(</span>wanted<span class="hl opt">+</span><span class="hl num">4095</span><span class="hl opt">)&amp;(-</span><span class="hl num">4096ll</span><span class="hl opt">);</span>	<span class="hl com">/* round up to 4k pages */</span>
+
+      <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwd">__unlikely</span><span class="hl opt">(</span>wanted<span class="hl opt">&lt;</span><span class="hl num">128</span><span class="hl opt">))</span> <span class="hl kwa">return</span> <span class="hl num">0</span><span class="hl opt">;</span>	<span class="hl com">/* overflow during rounding */</span>
+
+      <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwa">sizeof</span><span class="hl opt">(</span><span class="hl kwb">size_t</span><span class="hl opt">) !=</span> <span class="hl kwa">sizeof</span><span class="hl opt">(</span>int64<span class="hl opt">) &amp;&amp;</span> <span class="hl kwd">__unlikely</span><span class="hl opt">((</span><span class="hl kwb">size_t</span><span class="hl opt">)(</span>wanted<span class="hl opt">) !=</span> wanted<span class="hl opt">))</span>
+	<span class="hl kwa">return</span> <span class="hl num">0</span><span class="hl opt">;</span>
+      <span class="hl opt">{</span>
+	<span class="hl kwb">char</span><span class="hl opt">*</span> tmp<span class="hl opt">=</span><span class="hl kwd">realloc</span><span class="hl opt">(</span>x<span class="hl opt">-&gt;</span>p<span class="hl opt">,</span>wanted<span class="hl opt">);</span>
+	<span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwd">__unlikely</span><span class="hl opt">(!</span>tmp<span class="hl opt">))</span> <span class="hl kwa">return</span> <span class="hl num">0</span><span class="hl opt">;</span>
+	x<span class="hl opt">-&gt;</span>p<span class="hl opt">=</span>tmp<span class="hl opt">;</span>
+      <span class="hl opt">}</span>
+      x<span class="hl opt">-&gt;</span>allocated<span class="hl opt">=</span>wanted<span class="hl opt">;</span>
+      <span class="hl kwd">byte_zero</span><span class="hl opt">(</span>x<span class="hl opt">-&gt;</span>p<span class="hl opt">+</span>x<span class="hl opt">-&gt;</span>initialized<span class="hl opt">,</span>x<span class="hl opt">-&gt;</span>allocated<span class="hl opt">-</span>x<span class="hl opt">-&gt;</span>initialized<span class="hl opt">);</span>
+    <span class="hl opt">}</span>
+    x<span class="hl opt">-&gt;</span>initialized<span class="hl opt">=(</span>pos<span class="hl opt">+</span><span class="hl num">1</span><span class="hl opt">)*</span>membersize<span class="hl opt">;</span>
+  <span class="hl opt">}</span>
+
+  <span class="hl kwa">return</span> x<span class="hl opt">-&gt;</span>p<span class="hl opt">+</span>pos<span class="hl opt">*</span>membersize<span class="hl opt">;</span>
+<span class="hl opt">}</span>
+</pre>
+</body>
+</html>
+<!--HTML generated by highlight 3.41, http://www.andre-simon.de/-->

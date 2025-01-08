@@ -1,0 +1,144 @@
+Content-type: text/html; charset=UTF-8
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><HEAD><TITLE>Man page of array</TITLE>
+</HEAD><BODY>
+<H1>array</H1>
+Section: C Library Functions (3)<BR><A HREF="#index">Index</A>
+<A HREF="/cgi-bin/man/man2html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+array - The array library interface
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNTAX</H2>
+
+<B>#include &lt;<A HREF="file:///usr/include/libowfat/array.h">libowfat/array.h</A>&gt;</B>
+
+<P>
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+An <B>allocated</B> array variable keeps track of
+<P>
+<P>
+<DL COMPACT>
+<DT>&bull;<DD>
+a (nonzero) pointer to a dynamically allocated region of memory;
+<DT>&bull;<DD>
+the number of bytes allocated (always positive); and
+<DT>&bull;<DD>
+the number of bytes initialized (between 0 and the number of bytes
+allocated).
+</DL>
+<P>
+
+<P>
+There are two other possibilities for the state of an array variable:
+<B>unallocated</B> and <I>failed</I>.  In both cases, there is no
+dynamically allocated region of memory.
+<P>
+A new array variable is normally created as a static variable:
+<P>
+<BR>&nbsp;&nbsp;#include&nbsp;&lt;<A HREF="file:///usr/include/libowfat/array.h">libowfat/array.h</A>&gt;
+<P>
+<BR>&nbsp;&nbsp;static&nbsp;array&nbsp;x;
+<P>
+At this point it is unallocated.  The array library provides various
+allocation and inspection functions.
+<P>
+A new array variable can also be created dynamically. It must be
+initialized to all-0, meaning unallocated, before it is given to any of
+the array functions. It must be returned to the unallocated (or failed)
+state, for example with array_reset, before it is destroyed. These rules
+prevent all memory leaks.
+<A NAME="lbAE">&nbsp;</A>
+<H2>Expansion and inspection</H2>
+
+<P>
+<BR>&nbsp;&nbsp;array&nbsp;x;
+<P>
+<BR>&nbsp;&nbsp;t*&nbsp;p1&nbsp;=&nbsp;array_allocate(&amp;x,sizeof(t),pos);
+<P>
+<BR>&nbsp;&nbsp;t*&nbsp;p2&nbsp;=&nbsp;array_get(&amp;x,sizeof(t),pos);
+<P>
+<BR>&nbsp;&nbsp;t*&nbsp;p3&nbsp;=&nbsp;array_start(&amp;x);
+<P>
+<BR>&nbsp;&nbsp;int64&nbsp;len&nbsp;=&nbsp;array_length(&amp;x,sizeof(t));
+<P>
+<BR>&nbsp;&nbsp;int64&nbsp;bytes&nbsp;=&nbsp;array_bytes(&amp;x);
+<P>
+<A NAME="lbAF">&nbsp;</A>
+<H2>Truncation and deallocation</H2>
+
+<P>
+<BR>&nbsp;&nbsp;array&nbsp;x;
+<P>
+<BR>&nbsp;&nbsp;array_truncate(&amp;x,sizeof(t),len);
+<P>
+<BR>&nbsp;&nbsp;array_trunc(&amp;x);
+<P>
+<BR>&nbsp;&nbsp;array_reset(&amp;x);
+<P>
+<BR>&nbsp;&nbsp;array_fail(&amp;x);
+<P>
+<A NAME="lbAG">&nbsp;</A>
+<H2>Comparison</H2>
+
+<P>
+<BR>&nbsp;&nbsp;array&nbsp;x;
+<BR>&nbsp;&nbsp;array&nbsp;y;
+<P>
+<BR>&nbsp;&nbsp;if&nbsp;(array_equal(&amp;x,&amp;y))
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;/*&nbsp;arrays&nbsp;are&nbsp;equal...&nbsp;*/
+<P>
+<A NAME="lbAH">&nbsp;</A>
+<H2>Concatenation</H2>
+
+<P>
+<BR>&nbsp;&nbsp;array&nbsp;x;
+<BR>&nbsp;&nbsp;array&nbsp;y;
+<P>
+<BR>&nbsp;&nbsp;array_cat(&amp;x,&amp;y);
+<P>
+<BR>&nbsp;&nbsp;array_catb(&amp;x,&quot;fnord&quot;,5);
+<P>
+<BR>&nbsp;&nbsp;array_cats(&amp;x,&quot;fnord&quot;);
+<P>
+<BR>&nbsp;&nbsp;array_cats0(&amp;x,&quot;fnord&quot;);&nbsp;/*&nbsp;also&nbsp;append&nbsp;the&nbsp;\0&nbsp;*/
+<P>
+<BR>&nbsp;&nbsp;array_cat0(&amp;x);&nbsp;/*&nbsp;append&nbsp;\0&nbsp;*/
+<P>
+<BR>&nbsp;&nbsp;array_cate(&amp;x,&quot;fnord&quot;,1,4);&nbsp;/*&nbsp;append&nbsp;&quot;nor&quot;&nbsp;*/
+<P>
+<A NAME="lbAI">&nbsp;</A>
+<H2>ORIGINAL API DEFINITION</H2>
+
+<A HREF="http://cr.yp.to/lib/array.html">http://cr.yp.to/lib/array.html</A>
+<A NAME="lbAJ">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF="/cgi-bin/man/man2html?3+array_get">array_get</A>(3), <A HREF="/cgi-bin/man/man2html?3+array_start">array_start</A>(3), <A HREF="/cgi-bin/man/man2html?3+array_fail">array_fail</A>(3)
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNTAX</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">Expansion and inspection</A><DD>
+<DT><A HREF="#lbAF">Truncation and deallocation</A><DD>
+<DT><A HREF="#lbAG">Comparison</A><DD>
+<DT><A HREF="#lbAH">Concatenation</A><DD>
+<DT><A HREF="#lbAI">ORIGINAL API DEFINITION</A><DD>
+<DT><A HREF="#lbAJ">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 08:55:18 GMT, January 08, 2025
+</BODY>
+</HTML>
