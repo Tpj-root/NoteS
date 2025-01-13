@@ -1,0 +1,364 @@
+
+To install Laravel on Debian, follow these steps:
+
+https://www.youtube.com/watch?v=6L02VbgCSTA&ab_channel=LinuxHelp
+
+
+
+sudo apt update
+sudo apt install php php-cli php-fpm php-mbstring php-xml php-bcmath php-json php-zip unzip curl 
+
+
+
+
+# MariaDB
+
+sudo apt install php-mysqli
+
+
+
+# Install Composer
+
+
+
+sudo apt update
+sudo apt install curl php-cli php-mbstring git unzip
+
+
+curl -sS https://getcomposer.org/installer | php
+
+
+**Move the composer.phar to a global location:**
+
+```
+sudo mv composer.phar /usr/local/bin/composer
+```
+
+
+
+# Create Laravel Project
+
+```
+composer create-project --prefer-dist laravel/laravel my-laravel-app
+
+```
+
+
+
+if any error try again
+
+```
+sudo rm -rf my-laravel-app
+
+composer create-project --prefer-dist laravel/laravel my-laravel-app
+```
+
+
+
+
+
+
+```
+sab@debian:~/Desktop/MY_GIT/test_Laravel$ ls -al my-laravel-app/
+total 396
+drwxr-xr-x 12 sab sab   4096 Jan 13 12:56 .
+drwxr-xr-x  3 sab sab   4096 Jan 13 12:56 ..
+drwxr-xr-x  5 sab sab   4096 Dec 13 19:27 app
+-rwxr-xr-x  1 sab sab    350 Dec 13 19:27 artisan
+drwxr-xr-x  3 sab sab   4096 Dec 13 19:27 bootstrap
+-rw-r--r--  1 sab sab   2306 Dec 13 19:27 composer.json
+-rw-r--r--  1 sab sab 297277 Jan 13 12:51 composer.lock
+drwxr-xr-x  2 sab sab   4096 Dec 13 19:27 config
+drwxr-xr-x  5 sab sab   4096 Jan 13 12:52 database
+-rw-r--r--  1 sab sab    258 Dec 13 19:27 .editorconfig
+-rw-r--r--  1 sab sab    109 Jan 13 12:35 .env
+-rw-r--r--  1 sab sab   1099 Dec 13 19:27 .env.example
+-rw-r--r--  1 sab sab    186 Dec 13 19:27 .gitattributes
+-rw-r--r--  1 sab sab    285 Dec 13 19:27 .gitignore
+-rw-r--r--  1 sab sab    378 Dec 13 19:27 package.json
+-rw-r--r--  1 sab sab   1191 Dec 13 19:27 phpunit.xml
+-rw-r--r--  1 sab sab     93 Dec 13 19:27 postcss.config.js
+drwxr-xr-x  2 sab sab   4096 Dec 13 19:27 public
+-rw-r--r--  1 sab sab   4109 Dec 13 19:27 README.md
+drwxr-xr-x  5 sab sab   4096 Dec 13 19:27 resources
+drwxr-xr-x  2 sab sab   4096 Dec 13 19:27 routes
+drwxr-xr-x  5 sab sab   4096 Dec 13 19:27 storage
+-rw-r--r--  1 sab sab    551 Dec 13 19:27 tailwind.config.js
+drwxr-xr-x  4 sab sab   4096 Dec 13 19:27 tests
+drwxr-xr-x 40 sab sab   4096 Jan 13 12:52 vendor
+-rw-r--r--  1 sab sab    263 Dec 13 19:27 vite.config.js
+
+```
+
+
+
+.env
+
+
+```
+cat .env
+
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=my_database
+DB_USERNAME=root
+DB_PASSWORD=123
+
+
+
+
+
+```
+
+
+
+test
+
+
+'''
+mysql -u root -p123 -h 127.0.0.1 -P 3306 my_database
+
+'''
+
+
+
+
+# Check Laravel Database Connection
+
+```
+php artisan migrate:status
+
+```
+
+
+
+
+# To rollback the migrations, run:  if any error
+php artisan migrate:rollback
+
+# Create the Migration Table
+php artisan migrate
+
+
+# 
+php artisan migrate:status
+
+
+
+
+
+
+
+# port config
+sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf
+
+```
+port = 3306
+```
+
+```
+[mysqld]
+bind-address = 0.0.0.0  # Allow connections from all IPs (or use 127.0.0.1 for localhost)
+port = 3306             # Default MySQL port
+socket = /var/run/mysqld/mysqld.sock
+
+```
+
+
+# Look for the socket directive under [mysqld] (server settings) or [client] (client settings):
+
+
+```
+[mysqld]
+socket = /var/run/mysqld/mysqld.sock
+
+[client]
+socket = /var/run/mysqld/mysqld.sock
+
+
+```
+
+
+To set up authentication with Laravel (if you're using Laravel 8.x or higher), you can follow these steps:
+
+
+```
+composer require laravel/ui
+```
+
+ Scaffold the authentication views:
+
+```
+php artisan ui bootstrap --auth
+
+```
+
+Install the NPM dependencies:
+
+
+```
+npm install
+npm run dev
+
+
+```
+
+
+
+
+
+Permissions: Ensure that the storage/ and bootstrap/cache/ directories have the correct write permissions for the web server to write logs and cache data. You can run:
+
+
+```
+sudo chmod -R 775 storage bootstrap/cache
+
+sudo chmod -R 775 storage bootstrap/cache vendor
+sudo chown -R $USER:www-data storage bootstrap/cache vendor
+
+
+```
+
+
+
+
+# RUN
+
+```
+php artisan serve
+
+```
+
+
+Run the following commands to clear the cache and config cache:
+
+```
+php artisan config:clear
+php artisan cache:clear
+php artisan route:clear
+php artisan view:clear
+
+
+```
+
+
+
+composer install
+
+
+php artisan migrate
+
+
+
+
+
+
+1. Generate the application key
+
+```
+php artisan key:generate
+```
+
+# This will generate a new key and update the .env file with the key:
+```
+APP_KEY=base64:YOUR_GENERATED_KEY
+```
+
+# Check 
+
+```
+cat .env | grep "APP_KEY"
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+# How to Verify the Socket File
+
+
+```
+ls -l /var/run/mysqld/mysqld.sock
+```
+
+
+```
+The mysqld.sock file is a Unix socket file used by MariaDB (and MySQL) for communication between the MariaDB server and client when they are on the same system. Unlike text files or regular data files, a Unix socket file doesn't have a readable content in the way you might expect with regular files. Instead, it's a special type of file that acts as an endpoint for inter-process communication (IPC).
+
+```
+
+
+
+
+
+#  Check for Listening Ports Using ss
+
+```
+sudo ss -tuln
+
+```
+
+
+# Check MariaDB Status
+
+```
+sudo systemctl status mariadb
+
+```
+
+
+
+
+# Check via MariaDB Command
+
+```
+sudo mysql -u root -p
+
+SHOW VARIABLES LIKE 'port';
+```
+
+
+
+
+# How to Connect Using the Socket in PHP?
+
+```
+$servername = "localhost";  // Could also be 127.0.0.1
+$username = "root";         // Replace with your MySQL username
+$password = "123";          // Replace with your MySQL password
+$dbname = "my_database";    // Replace with your database name
+$socket = "/var/run/mysqld/mysqld.sock";  // Path to the Unix socket
+
+// Create connection using the Unix socket
+$conn = new mysqli($servername, $username, $password, $dbname, null, $socket);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+echo "Connected successfully!";
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
