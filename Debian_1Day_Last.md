@@ -21,3 +21,8 @@ gsettings set org.gnome.shell favorite-apps "['org.gnome.Terminal.desktop', 'fir
 
 
 
+
+# install
+
+https://github.com/aandrew-me/ytDownloader/releases
+
