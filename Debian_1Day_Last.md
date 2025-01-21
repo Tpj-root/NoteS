@@ -26,3 +26,20 @@ gsettings set org.gnome.shell favorite-apps "['org.gnome.Terminal.desktop', 'fir
 
 https://github.com/aandrew-me/ytDownloader/releases
 
+
+
+
+
+# install
+# JDK Development Kit 21.0.5 downloads
+https://www.oracle.com/java/technologies/downloads/#java21
+
+
+
+https://github.com/NationalSecurityAgency/ghidra/releases
+
+
+ghidra_11.2.1_PUBLIC_20241105.zip 
+
+
+
